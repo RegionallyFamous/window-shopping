@@ -1,0 +1,611 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "title": "Pantry",
+  "settings": {
+    "layout": {
+      "contentSize": "780px",
+      "wideSize": "1240px"
+    },
+    "color": {
+      "palette": [
+        {
+          "name": "Base",
+          "slug": "base",
+          "color": "#fbefd9"
+        },
+        {
+          "name": "Surface",
+          "slug": "surface",
+          "color": "#fff9ed"
+        },
+        {
+          "name": "Contrast",
+          "slug": "contrast",
+          "color": "#733219"
+        },
+        {
+          "name": "Muted",
+          "slug": "muted",
+          "color": "#7f563f"
+        },
+        {
+          "name": "Accent",
+          "slug": "accent",
+          "color": "#557246"
+        },
+        {
+          "name": "Accent 2",
+          "slug": "accent-2",
+          "color": "#c56b2b"
+        },
+        {
+          "name": "Accent 3",
+          "slug": "accent-3",
+          "color": "#ead1a5"
+        }
+      ],
+      "gradients": [
+        {
+          "name": "Market Morning",
+          "slug": "soft-storefront",
+          "gradient": "linear-gradient(135deg, #fffff7 0%, #fff7df 52%, #e2f1dc 100%)"
+        },
+        {
+          "name": "Produce Bin",
+          "slug": "accent-wash",
+          "gradient": "linear-gradient(135deg, #2f784b 0%, #d95a2b 50%, #2e6f91 100%)"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "name": "Body",
+          "slug": "body",
+          "fontFamily": "\"Nunito Sans\", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Nunito Sans",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": [
+                "file:./assets/fonts/nunito-sans-normal-400-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Nunito Sans",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": [
+                "file:./assets/fonts/nunito-sans-normal-500-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Nunito Sans",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "src": [
+                "file:./assets/fonts/nunito-sans-normal-600-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Nunito Sans",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "src": [
+                "file:./assets/fonts/nunito-sans-normal-700-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Nunito Sans",
+              "fontStyle": "normal",
+              "fontWeight": "800",
+              "src": [
+                "file:./assets/fonts/nunito-sans-normal-800-latin.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Heading",
+          "slug": "heading",
+          "fontFamily": "\"Fraunces\", Georgia, \"Times New Roman\", serif",
+          "fontFace": [
+            {
+              "fontFamily": "Fraunces",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": [
+                "file:./assets/fonts/fraunces-normal-500-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Fraunces",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "src": [
+                "file:./assets/fonts/fraunces-normal-600-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Fraunces",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "src": [
+                "file:./assets/fonts/fraunces-normal-700-latin.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mono",
+          "slug": "mono",
+          "fontFamily": "\"IBM Plex Mono\", \"SF Mono\", Menlo, Consolas, monospace",
+          "fontFace": [
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-400-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-500-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-600-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-700-latin.woff2"
+              ]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "Small",
+          "slug": "small",
+          "size": "0.72rem"
+        },
+        {
+          "name": "Medium",
+          "slug": "medium",
+          "size": "1rem"
+        },
+        {
+          "name": "Large",
+          "slug": "large",
+          "size": "1.18rem"
+        },
+        {
+          "name": "XL",
+          "slug": "x-large",
+          "size": "2rem"
+        },
+        {
+          "name": "XXL",
+          "slug": "xx-large",
+          "size": "3rem"
+        },
+        {
+          "name": "Display",
+          "slug": "display",
+          "size": "4.4rem"
+        }
+      ]
+    },
+    "spacing": {
+      "spacingSizes": [
+        {
+          "name": "2XS",
+          "slug": "20",
+          "size": "0.375rem"
+        },
+        {
+          "name": "XS",
+          "slug": "30",
+          "size": "0.75rem"
+        },
+        {
+          "name": "S",
+          "slug": "40",
+          "size": "1.125rem"
+        },
+        {
+          "name": "M",
+          "slug": "50",
+          "size": "1.875rem"
+        },
+        {
+          "name": "L",
+          "slug": "60",
+          "size": "3rem"
+        },
+        {
+          "name": "XL",
+          "slug": "70",
+          "size": "5.25rem"
+        }
+      ]
+    },
+    "shadow": {
+      "presets": [
+        {
+          "name": "Soft",
+          "slug": "soft",
+          "shadow": "0 28px 80px -56px rgba(40, 23, 14, 0.54)"
+        },
+        {
+          "name": "Crisp",
+          "slug": "crisp",
+          "shadow": "0 1px 0 rgba(40, 23, 14, 0.16), 0 18px 38px -31px rgba(217, 90, 43, 0.48)"
+        },
+        {
+          "name": "Edge",
+          "slug": "edge",
+          "shadow": "6px 6px 0 #d95a2b"
+        }
+      ]
+    },
+    "custom": {
+      "radius": "16px",
+      "productImageRatio": "4 / 5",
+      "productGridMin": "14rem",
+      "borderWeight": "1px",
+      "surfaceMix": "96%",
+      "buttonRadius": "999px",
+      "window": {
+        "headerFilter": "blur(12px)",
+        "buttonHoverTransform": "translateY(-1px)",
+        "surfaceTextColor": "var(--wp--preset--color--contrast)",
+        "surfaceMutedColor": "var(--wp--preset--color--muted)",
+        "surfaceLinkColor": "var(--wp--preset--color--accent)",
+        "surfaceBorderColor": "color-mix(in srgb, var(--wp--preset--color--accent-2) 30%, transparent)",
+        "surfaceKickerColor": "var(--wp--preset--color--accent)",
+        "pageKickerColor": "var(--wp--preset--color--accent)",
+        "controlBackground": "var(--wp--preset--color--surface)",
+        "controlTextColor": "var(--wp--preset--color--contrast)",
+        "controlBorderColor": "color-mix(in srgb, var(--wp--preset--color--contrast) 24%, transparent)",
+        "checkoutKickerColor": "var(--wp--preset--color--accent)",
+        "kickerGap": "0.58rem",
+        "kickerMarkerSize": "0.52rem",
+        "kickerMarkerRadius": "999px",
+        "kickerMarkerBackground": "var(--wp--preset--color--accent-2)",
+        "heroBackground": "radial-gradient(circle at 78% 18%, color-mix(in srgb, var(--wp--preset--color--accent-2) 24%, transparent) 0 13rem, transparent 13.6rem), linear-gradient(color-mix(in srgb, var(--wp--preset--color--contrast) 4%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in srgb, var(--wp--preset--color--contrast) 4%, transparent) 1px, transparent 1px), linear-gradient(135deg, var(--wp--preset--color--base), var(--wp--preset--color--surface))",
+        "heroPattern": "radial-gradient(ellipse at 84% 22%, color-mix(in srgb, var(--wp--preset--color--accent) 24%, transparent) 0 15rem, transparent 15.6rem)",
+        "heroPatternSize": "auto",
+        "heroPatternMask": "none",
+        "heroPatternOpacity": "0.72",
+        "displayBackground": "color-mix(in srgb, var(--wp--preset--color--surface) 80%, transparent)",
+        "displayShadowInset": "auto 1rem 0.9rem",
+        "displayShadowHeight": "0.6rem",
+        "displayShadowRadius": "999px",
+        "displayShadowBackground": "color-mix(in srgb, var(--wp--preset--color--accent-2) 18%, transparent)",
+        "displayShadowFilter": "blur(8px)",
+        "productCardPadding": "0.85rem",
+        "showcaseCardPadding": "0.56rem",
+        "productCardBackground": "var(--wp--preset--color--surface)",
+        "productCardShadow": "0 16px 36px -30px rgba(115, 50, 25, 0.4)",
+        "productCardBorderStyle": "solid",
+        "productImageRadius": "12px",
+        "productImageBackground": "color-mix(in srgb, var(--wp--preset--color--accent-3) 44%, var(--wp--preset--color--surface))",
+        "productImageHoverTransform": "scale(1.025)",
+        "collectionGap": "1rem",
+        "indexCardGap": "0.95rem",
+        "showcaseGap": "0.5rem",
+        "editorialGap": "1.25rem",
+        "showcaseCardShadow": "var(--wp--preset--shadow--soft)",
+        "headerBackground": "color-mix(in srgb, var(--wp--preset--color--surface) 92%, transparent)",
+        "headerTextColor": "var(--wp--preset--color--contrast)",
+        "headerLinkColor": "var(--wp--preset--color--contrast)",
+        "headerBorderColor": "color-mix(in srgb, var(--wp--preset--color--accent-2) 28%, transparent)",
+        "topBarDisplay": "none",
+        "topBarMinHeight": "2.05rem",
+        "topBarBackground": "transparent",
+        "topBarTextColor": "var(--wp--preset--color--muted)",
+        "topBarBorderColor": "color-mix(in srgb, var(--wp--preset--color--contrast) 14%, transparent)",
+        "headerInnerMinHeight": "4rem",
+        "headerInnerPaddingY": "0.5rem",
+        "heroMinHeight": "calc(100vh - 10.1rem)",
+        "heroPaddingTop": "var(--wp--preset--spacing--40)",
+        "heroPaddingBottom": "var(--wp--preset--spacing--30)",
+        "heroColumns": "minmax(0, 0.74fr) minmax(0, 1.26fr)",
+        "heroGap": "var(--wp--preset--spacing--40)",
+        "heroAlignItems": "stretch",
+        "heroCopyBackground": "transparent",
+        "heroCopyBorder": "0",
+        "heroCopyRadius": "0",
+        "heroCopyShadow": "none",
+        "heroCopyMinHeight": "26rem",
+        "heroCopyPadding": "var(--wp--preset--spacing--40) 0",
+        "heroCopyAlignSelf": "center",
+        "heroDisplayAlignSelf": "stretch",
+        "heroHeadingMaxWidth": "10.8ch",
+        "heroHeadingColor": "var(--wp--preset--color--contrast)",
+        "heroTextColor": "var(--wp--preset--color--muted)",
+        "heroTextMaxWidth": "28rem",
+        "heroKickerColor": "var(--wp--preset--color--accent-2)",
+        "heroOutlineButtonColor": "var(--wp--preset--color--contrast)",
+        "heroOutlineButtonBorderColor": "var(--wp--preset--color--contrast)",
+        "displayRadius": "18px",
+        "displayBorderColor": "color-mix(in srgb, var(--wp--preset--color--accent-2) 38%, transparent)",
+        "displayBorderStyle": "solid",
+        "displayBorderWidth": "1px",
+        "displayBoxShadow": "0 22px 48px -38px rgba(115, 50, 25, 0.45)",
+        "displayMinHeight": "25.2rem",
+        "displayPadding": "0.78rem",
+        "displayLabelColor": "var(--wp--preset--color--muted)",
+        "showcaseTemplate": "repeat(4, minmax(0, 1fr))",
+        "showcaseFirstRow": "auto",
+        "showcaseFirstColumn": "auto",
+        "showcaseFirstImageRatio": "var(--wp--custom--window--showcase-image-ratio, var(--wp--custom--product-image-ratio))",
+        "trustBandBackground": "var(--wp--preset--color--accent)",
+        "trustBandTextColor": "var(--wp--preset--color--surface)",
+        "trustBandBorderColor": "var(--wp--preset--color--accent)",
+        "trustBandPaddingY": "0.74rem",
+        "trustBandGap": "var(--wp--preset--spacing--40)",
+        "trustItemJustify": "center",
+        "trustItemTextAlign": "center",
+        "trustMarkerSize": "0.55rem",
+        "trustMarkerRadius": "999px",
+        "trustMarkerBackground": "color-mix(in srgb, var(--wp--preset--color--accent) 16%, transparent)",
+        "trustMarkerBorder": "1px solid var(--wp--preset--color--accent)",
+        "showcaseCardMinHeight": "16.7rem",
+        "showcaseImageRatio": "4 / 5",
+        "showcaseImageRadius": "10px",
+        "showcaseTitleMarginTop": "0.55rem",
+        "showcaseTitleMarginBottom": "0.2rem",
+        "showcaseTitleFontSize": "0.76rem",
+        "showcaseTitleLineHeight": "1.16",
+        "showcaseTitleColor": "var(--wp--preset--color--contrast)",
+        "showcasePriceColor": "var(--wp--preset--color--contrast)",
+        "showcasePriceFontSize": "0.7rem",
+        "showcasePriceMarginBottom": "0.62rem",
+        "showcaseButtonSize": "1.8rem",
+        "showcaseButtonRadius": "999px",
+        "showcaseButtonBorder": "1px solid var(--wp--preset--color--accent)",
+        "showcaseButtonBackground": "var(--wp--preset--color--accent)",
+        "showcaseButtonColor": "var(--wp--preset--color--surface)",
+        "showcaseButtonShadow": "none",
+        "showcaseButtonSymbolSize": "1rem",
+        "showcaseCardTilt": "0deg",
+        "showcaseCardTilt1": "0deg",
+        "showcaseCardTilt2": "0deg",
+        "showcaseCardTilt3": "0deg",
+        "heroAccentDisplay": "block",
+        "heroAccentTop": "auto",
+        "heroAccentRight": "auto",
+        "heroAccentBottom": "14%",
+        "heroAccentLeft": "42%",
+        "heroAccentWidth": "10rem",
+        "heroAccentHeight": "10rem",
+        "heroAccentBorder": "0",
+        "heroAccentRadius": "44% 56% 48% 52%",
+        "heroAccentBackground": "radial-gradient(circle at 42% 38%, color-mix(in srgb, var(--wp--preset--color--accent-2) 38%, var(--wp--preset--color--surface)) 0 36%, transparent 37%), radial-gradient(ellipse at 65% 24%, color-mix(in srgb, var(--wp--preset--color--accent) 42%, transparent) 0 16%, transparent 17%)",
+        "heroAccentShadow": "none",
+        "heroAccentOpacity": "0.72",
+        "heroAccentTransform": "rotate(-9deg)",
+        "heroAreas": "'copy display'",
+        "heroCopyJustifySelf": "stretch",
+        "heroCopyWidth": "auto",
+        "heroCopyMaxWidth": "none",
+        "heroDisplayJustifySelf": "stretch",
+        "heroDisplayWidth": "auto",
+        "heroDisplayMaxWidth": "none",
+        "headerActionBackground": "transparent",
+        "headerActionColor": "var(--wp--preset--color--contrast)",
+        "headerActionBorderColor": "transparent",
+        "brandMaxWidth": "5.5rem",
+        "brandFontSize": "0.84rem",
+        "brandLineHeight": "0.94",
+        "brandTextTransform": "none",
+        "headerInnerGap": "var(--wp--preset--spacing--40)",
+        "headerGridColumns": "minmax(10rem, 1fr) auto minmax(10rem, 1fr)",
+        "headerIconSize": "21px",
+        "productCardBorderColor": "color-mix(in srgb, var(--wp--preset--color--accent-2) 32%, transparent)",
+        "trustBandMarginTop": "0",
+        "trustItemGap": "0.56rem",
+        "trustIconSize": "1.66rem",
+        "trustIconStrokeWidth": "1.55",
+        "navFontSize": "0.70rem",
+        "navFontWeight": "700",
+        "navTextTransform": "none",
+        "heroHeadingMarginTop": "0.64rem",
+        "heroHeadingMarginBottom": "0.7rem",
+        "heroTextMarginBottom": "0.84rem",
+        "heroButtonGap": "0.55rem",
+        "displayLabelGap": "0.62rem",
+        "mobileDisplayPadding": "0.68rem",
+        "mobileHeroGap": "var(--wp--preset--spacing--30)",
+        "mobileShowcaseGap": "0.45rem",
+        "mobileShowcaseCardPadding": "0.5rem",
+        "mobileShowcaseCardMinHeight": "13.4rem",
+        "mobileTrustBandGap": "var(--wp--preset--spacing--30)"
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var:preset|color|base",
+      "text": "var:preset|color|contrast"
+    },
+    "spacing": {
+      "blockGap": "var:preset|spacing|40",
+      "padding": {
+        "right": "var:preset|spacing|50",
+        "left": "var:preset|spacing|50"
+      }
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|body",
+      "fontSize": "var:preset|font-size|medium",
+      "fontWeight": "520",
+      "lineHeight": "1.52",
+      "letterSpacing": "0"
+    },
+    "elements": {
+      "button": {
+        "border": {
+          "radius": "var(--wp--custom--button-radius)",
+          "width": "0"
+        },
+        "color": {
+          "background": "var:preset|color|contrast",
+          "text": "var:preset|color|surface"
+        },
+        "spacing": {
+          "padding": {
+            "top": "0.82rem",
+            "right": "1.18rem",
+            "bottom": "0.82rem",
+            "left": "1.18rem"
+          }
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontSize": "0.72rem",
+          "fontWeight": "760",
+          "letterSpacing": "0",
+          "textDecoration": "none",
+          "textTransform": "uppercase"
+        }
+      },
+      "heading": {
+        "color": {
+          "text": "var:preset|color|contrast"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|heading",
+          "fontWeight": "600",
+          "letterSpacing": "0",
+          "lineHeight": "1"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var:preset|color|accent"
+        },
+        "typography": {
+          "textDecoration": "none"
+        }
+      }
+    },
+    "blocks": {
+      "core/navigation": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontSize": "0.72rem",
+          "fontWeight": "650",
+          "textTransform": "none",
+          "letterSpacing": "0"
+        },
+        "color": {
+          "text": "var:preset|color|contrast"
+        }
+      },
+      "core/site-title": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|body",
+          "fontWeight": "800",
+          "letterSpacing": "0",
+          "lineHeight": "1",
+          "fontSize": "0.84rem",
+          "textTransform": "none"
+        },
+        "color": {
+          "text": "var:preset|color|contrast"
+        }
+      },
+      "core/post-title": {
+        "typography": {
+          "fontSize": "var:preset|font-size|xx-large",
+          "lineHeight": "1",
+          "fontFamily": "var:preset|font-family|heading",
+          "fontWeight": "600"
+        }
+      },
+      "core/query-title": {
+        "typography": {
+          "fontSize": "var:preset|font-size|xx-large",
+          "fontFamily": "var:preset|font-family|heading",
+          "fontWeight": "600",
+          "lineHeight": "1"
+        }
+      },
+      "core/quote": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|heading",
+          "fontSize": "var:preset|font-size|large",
+          "lineHeight": "1.3"
+        }
+      },
+      "woocommerce/product-price": {
+        "color": {
+          "text": "var:preset|color|contrast"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontSize": "var:preset|font-size|small",
+          "fontWeight": "760",
+          "letterSpacing": "0"
+        }
+      },
+      "woocommerce/product-button": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontWeight": "800",
+          "letterSpacing": "0",
+          "textTransform": "uppercase"
+        },
+        "border": {
+          "radius": "var(--wp--custom--button-radius)"
+        },
+        "color": {
+          "background": "var:preset|color|contrast",
+          "text": "var:preset|color|surface"
+        }
+      },
+      "woocommerce/breadcrumbs": {
+        "color": {
+          "text": "var:preset|color|muted"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontSize": "var:preset|font-size|small",
+          "fontWeight": "720",
+          "textTransform": "uppercase"
+        }
+      },
+      "woocommerce/product-meta": {
+        "color": {
+          "text": "var:preset|color|muted"
+        },
+        "typography": {
+          "fontSize": "var:preset|font-size|small"
+        }
+      },
+      "woocommerce/product-rating": {
+        "color": {
+          "text": "var:preset|color|accent-2"
+        }
+      }
+    }
+  }
+}

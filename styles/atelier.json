@@ -1,0 +1,621 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "title": "Atelier",
+  "settings": {
+    "layout": {
+      "contentSize": "720px",
+      "wideSize": "1480px"
+    },
+    "color": {
+      "palette": [
+        {
+          "name": "Base",
+          "slug": "base",
+          "color": "#0f0f0e"
+        },
+        {
+          "name": "Surface",
+          "slug": "surface",
+          "color": "#f4eee2"
+        },
+        {
+          "name": "Contrast",
+          "slug": "contrast",
+          "color": "#f4eee2"
+        },
+        {
+          "name": "Muted",
+          "slug": "muted",
+          "color": "#b8ac98"
+        },
+        {
+          "name": "Accent",
+          "slug": "accent",
+          "color": "#ba8d2d"
+        },
+        {
+          "name": "Accent 2",
+          "slug": "accent-2",
+          "color": "#d8bc77"
+        },
+        {
+          "name": "Accent 3",
+          "slug": "accent-3",
+          "color": "#262320"
+        }
+      ],
+      "gradients": [
+        {
+          "name": "Editorial Fold",
+          "slug": "soft-storefront",
+          "gradient": "linear-gradient(90deg, #fffdf8 0%, #f3eee6 42%, #e3d4c3 100%)"
+        },
+        {
+          "name": "Runway Mark",
+          "slug": "accent-wash",
+          "gradient": "linear-gradient(135deg, #0c0c0f 0%, #7d1f36 56%, #b69154 100%)"
+        }
+      ]
+    },
+    "typography": {
+      "fontFamilies": [
+        {
+          "name": "Body",
+          "slug": "body",
+          "fontFamily": "\"Inter\", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+          "fontFace": [
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": [
+                "file:./assets/fonts/inter-normal-400-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": [
+                "file:./assets/fonts/inter-normal-500-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "src": [
+                "file:./assets/fonts/inter-normal-600-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "src": [
+                "file:./assets/fonts/inter-normal-700-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Inter",
+              "fontStyle": "normal",
+              "fontWeight": "800",
+              "src": [
+                "file:./assets/fonts/inter-normal-800-latin.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Heading",
+          "slug": "heading",
+          "fontFamily": "\"Cormorant Garamond\", Georgia, \"Times New Roman\", serif",
+          "fontFace": [
+            {
+              "fontFamily": "Cormorant Garamond",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": [
+                "file:./assets/fonts/cormorant-garamond-normal-400-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Cormorant Garamond",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": [
+                "file:./assets/fonts/cormorant-garamond-normal-500-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Cormorant Garamond",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "src": [
+                "file:./assets/fonts/cormorant-garamond-normal-600-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "Cormorant Garamond",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "src": [
+                "file:./assets/fonts/cormorant-garamond-normal-700-latin.woff2"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Mono",
+          "slug": "mono",
+          "fontFamily": "\"IBM Plex Mono\", \"SF Mono\", Menlo, Consolas, monospace",
+          "fontFace": [
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-400-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "500",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-500-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-600-latin.woff2"
+              ]
+            },
+            {
+              "fontFamily": "IBM Plex Mono",
+              "fontStyle": "normal",
+              "fontWeight": "700",
+              "src": [
+                "file:./assets/fonts/ibm-plex-mono-normal-700-latin.woff2"
+              ]
+            }
+          ]
+        }
+      ],
+      "fontSizes": [
+        {
+          "name": "Small",
+          "slug": "small",
+          "size": "0.66rem"
+        },
+        {
+          "name": "Medium",
+          "slug": "medium",
+          "size": "1rem"
+        },
+        {
+          "name": "Large",
+          "slug": "large",
+          "size": "1.15rem"
+        },
+        {
+          "name": "XL",
+          "slug": "x-large",
+          "size": "2rem"
+        },
+        {
+          "name": "XXL",
+          "slug": "xx-large",
+          "size": "3rem"
+        },
+        {
+          "name": "Display",
+          "slug": "display",
+          "size": "4.65rem"
+        }
+      ]
+    },
+    "spacing": {
+      "spacingSizes": [
+        {
+          "name": "2XS",
+          "slug": "20",
+          "size": "0.375rem"
+        },
+        {
+          "name": "XS",
+          "slug": "30",
+          "size": "0.75rem"
+        },
+        {
+          "name": "S",
+          "slug": "40",
+          "size": "1.125rem"
+        },
+        {
+          "name": "M",
+          "slug": "50",
+          "size": "1.875rem"
+        },
+        {
+          "name": "L",
+          "slug": "60",
+          "size": "3.2rem"
+        },
+        {
+          "name": "XL",
+          "slug": "70",
+          "size": "5.5rem"
+        }
+      ]
+    },
+    "shadow": {
+      "presets": [
+        {
+          "name": "Soft",
+          "slug": "soft",
+          "shadow": "0 48px 120px -86px rgba(12, 12, 15, 0.7)"
+        },
+        {
+          "name": "Crisp",
+          "slug": "crisp",
+          "shadow": "0 1px 0 rgba(12, 12, 15, 0.18)"
+        },
+        {
+          "name": "Edge",
+          "slug": "edge",
+          "shadow": "0 0 0 1px #0c0c0f"
+        }
+      ]
+    },
+    "custom": {
+      "radius": "0px",
+      "productImageRatio": "3 / 4",
+      "productGridMin": "14rem",
+      "borderWeight": "1px",
+      "surfaceMix": "100%",
+      "buttonRadius": "0px",
+      "window": {
+        "headerFilter": "none",
+        "buttonHoverTransform": "translateY(-1px)",
+        "surfaceTextColor": "#171412",
+        "surfaceMutedColor": "#5e574c",
+        "surfaceLinkColor": "var(--wp--preset--color--accent)",
+        "surfaceBorderColor": "color-mix(in srgb, #171412 24%, transparent)",
+        "surfaceKickerColor": "var(--wp--preset--color--accent)",
+        "pageKickerColor": "var(--wp--preset--color--accent)",
+        "controlBackground": "#fffaf0",
+        "controlTextColor": "#171412",
+        "controlBorderColor": "color-mix(in srgb, #171412 36%, transparent)",
+        "checkoutKickerColor": "var(--wp--preset--color--accent)",
+        "kickerGap": "0.65rem",
+        "kickerMarkerSize": "1rem",
+        "kickerMarkerRadius": "0",
+        "kickerMarkerBackground": "var(--wp--preset--color--accent-2)",
+        "heroBackground": "linear-gradient(90deg, var(--wp--preset--color--base) 0 41%, var(--wp--preset--color--surface) 41% 100%)",
+        "heroPattern": "linear-gradient(color-mix(in srgb, var(--wp--preset--color--contrast) 10%, transparent) 1px, transparent 1px)",
+        "heroPatternSize": "100% 7rem",
+        "heroPatternMask": "linear-gradient(90deg, #000 0 41%, transparent 41% 100%)",
+        "heroPatternOpacity": "0.32",
+        "displayBackground": "var(--wp--preset--color--surface)",
+        "displayShadowInset": "auto 0 0",
+        "displayShadowHeight": "1px",
+        "displayShadowRadius": "0",
+        "displayShadowBackground": "var(--wp--preset--color--base)",
+        "displayShadowFilter": "none",
+        "productCardPadding": "0",
+        "showcaseCardPadding": "0",
+        "productCardBackground": "transparent",
+        "productCardShadow": "none",
+        "productCardBorderStyle": "solid",
+        "productImageRadius": "0",
+        "productImageBackground": "var(--wp--preset--color--surface)",
+        "productImageHoverTransform": "scale(1.018)",
+        "collectionGap": "1.1rem",
+        "indexCardGap": "1px",
+        "showcaseGap": "1px",
+        "editorialGap": "var(--wp--preset--spacing--50)",
+        "showcaseCardShadow": "none",
+        "headerBackground": "var(--wp--preset--color--base)",
+        "headerTextColor": "var(--wp--preset--color--contrast)",
+        "headerLinkColor": "var(--wp--preset--color--contrast)",
+        "headerBorderColor": "color-mix(in srgb, var(--wp--preset--color--contrast) 24%, transparent)",
+        "topBarDisplay": "none",
+        "topBarMinHeight": "2.05rem",
+        "topBarBackground": "transparent",
+        "topBarTextColor": "var(--wp--preset--color--muted)",
+        "topBarBorderColor": "color-mix(in srgb, var(--wp--preset--color--contrast) 14%, transparent)",
+        "headerInnerMinHeight": "4rem",
+        "headerInnerPaddingY": "0.5rem",
+        "heroMinHeight": "calc(100vh - 10.05rem)",
+        "heroPaddingTop": "1rem",
+        "heroPaddingBottom": "var(--wp--preset--spacing--30)",
+        "heroColumns": "minmax(0, 0.7fr) minmax(0, 1.3fr)",
+        "heroGap": "0",
+        "heroAlignItems": "stretch",
+        "heroCopyBackground": "var(--wp--preset--color--base)",
+        "heroCopyBorder": "0",
+        "heroCopyRadius": "0",
+        "heroCopyShadow": "none",
+        "heroCopyMinHeight": "26.4rem",
+        "heroCopyPadding": "var(--wp--preset--spacing--40) var(--wp--preset--spacing--50)",
+        "heroCopyAlignSelf": "center",
+        "heroDisplayAlignSelf": "stretch",
+        "heroHeadingMaxWidth": "9.6ch",
+        "heroHeadingColor": "var(--wp--preset--color--contrast)",
+        "heroTextColor": "color-mix(in srgb, var(--wp--preset--color--contrast) 72%, transparent)",
+        "heroTextMaxWidth": "20rem",
+        "heroKickerColor": "var(--wp--preset--color--accent-2)",
+        "heroOutlineButtonColor": "var(--wp--preset--color--contrast)",
+        "heroOutlineButtonBorderColor": "var(--wp--preset--color--accent-2)",
+        "displayRadius": "0",
+        "displayBorderColor": "transparent",
+        "displayBorderStyle": "solid",
+        "displayBorderWidth": "0",
+        "displayBoxShadow": "none",
+        "displayMinHeight": "25.8rem",
+        "displayPadding": "0.72rem 0 0.72rem 0.72rem",
+        "displayLabelColor": "#171412",
+        "showcaseTemplate": "repeat(4, minmax(0, 1fr))",
+        "showcaseFirstRow": "auto",
+        "showcaseFirstColumn": "auto",
+        "showcaseFirstImageRatio": "var(--wp--custom--window--showcase-image-ratio, var(--wp--custom--product-image-ratio))",
+        "trustBandBackground": "var(--wp--preset--color--surface)",
+        "trustBandTextColor": "#514a40",
+        "trustBandBorderColor": "color-mix(in srgb, #171412 20%, transparent)",
+        "trustBandPaddingY": "0.74rem",
+        "trustBandGap": "var(--wp--preset--spacing--40)",
+        "trustItemJustify": "center",
+        "trustItemTextAlign": "center",
+        "trustMarkerSize": "1.05rem",
+        "trustMarkerRadius": "0",
+        "trustMarkerBackground": "currentColor",
+        "trustMarkerBorder": "0",
+        "showcaseCardMinHeight": "18.7rem",
+        "showcaseImageRatio": "3 / 4",
+        "showcaseImageRadius": "0",
+        "showcaseTitleMarginTop": "0.54rem",
+        "showcaseTitleMarginBottom": "0.2rem",
+        "showcaseTitleFontSize": "0.66rem",
+        "showcaseTitleLineHeight": "1.16",
+        "showcaseTitleColor": "#171412",
+        "showcasePriceColor": "#171412",
+        "showcasePriceFontSize": "0.62rem",
+        "showcasePriceMarginBottom": "0.58rem",
+        "showcaseButtonSize": "1.55rem",
+        "showcaseButtonRadius": "999px",
+        "showcaseButtonBorder": "1px solid #171412",
+        "showcaseButtonBackground": "#171412",
+        "showcaseButtonColor": "var(--wp--preset--color--surface)",
+        "showcaseButtonShadow": "none",
+        "showcaseButtonSymbolSize": "0.9rem",
+        "showcaseCardTilt": "0deg",
+        "showcaseCardTilt1": "0deg",
+        "showcaseCardTilt2": "0deg",
+        "showcaseCardTilt3": "0deg",
+        "heroAccentDisplay": "block",
+        "heroAccentTop": "auto",
+        "heroAccentRight": "auto",
+        "heroAccentBottom": "4.2rem",
+        "heroAccentLeft": "3.4rem",
+        "heroAccentWidth": "12rem",
+        "heroAccentHeight": "1px",
+        "heroAccentBorder": "0",
+        "heroAccentRadius": "0",
+        "heroAccentBackground": "color-mix(in srgb, var(--wp--preset--color--contrast) 34%, transparent)",
+        "heroAccentShadow": "none",
+        "heroAccentOpacity": "1",
+        "heroAccentTransform": "none",
+        "heroAreas": "'copy display'",
+        "heroCopyJustifySelf": "stretch",
+        "heroCopyWidth": "auto",
+        "heroCopyMaxWidth": "none",
+        "heroDisplayJustifySelf": "stretch",
+        "heroDisplayWidth": "auto",
+        "heroDisplayMaxWidth": "none",
+        "headerActionBackground": "transparent",
+        "headerActionColor": "var(--wp--preset--color--contrast)",
+        "headerActionBorderColor": "transparent",
+        "brandMaxWidth": "5.2rem",
+        "brandFontSize": "0.82rem",
+        "brandLineHeight": "0.9",
+        "brandTextTransform": "uppercase",
+        "headerInnerGap": "var(--wp--preset--spacing--40)",
+        "headerGridColumns": "minmax(10rem, 1fr) auto minmax(10rem, 1fr)",
+        "headerIconSize": "21px",
+        "productCardBorderColor": "color-mix(in srgb, #171412 22%, transparent)",
+        "trustBandMarginTop": "0",
+        "trustItemGap": "0.55rem",
+        "trustIconSize": "1.6rem",
+        "trustIconStrokeWidth": "1.45",
+        "navFontSize": "0.66rem",
+        "navFontWeight": "520",
+        "navTextTransform": "none",
+        "heroHeadingMarginTop": "0.66rem",
+        "heroHeadingMarginBottom": "0.72rem",
+        "heroTextMarginBottom": "0.86rem",
+        "heroButtonGap": "0.55rem",
+        "displayLabelGap": "0.58rem",
+        "mobileDisplayPadding": "0.65rem",
+        "mobileHeroGap": "var(--wp--preset--spacing--30)",
+        "mobileShowcaseGap": "1px",
+        "mobileShowcaseCardPadding": "0",
+        "mobileShowcaseCardMinHeight": "0",
+        "mobileTrustBandGap": "var(--wp--preset--spacing--30)",
+        "mobileHeroBackground": "linear-gradient(180deg, var(--wp--preset--color--base) 0 44%, var(--wp--preset--color--surface) 44% 100%)"
+      }
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var:preset|color|base",
+      "text": "var:preset|color|contrast"
+    },
+    "spacing": {
+      "blockGap": "var:preset|spacing|40",
+      "padding": {
+        "right": "var:preset|spacing|50",
+        "left": "var:preset|spacing|50"
+      }
+    },
+    "typography": {
+      "fontFamily": "var:preset|font-family|body",
+      "fontSize": "var:preset|font-size|medium",
+      "fontWeight": "430",
+      "lineHeight": "1.52",
+      "letterSpacing": "0"
+    },
+    "elements": {
+      "button": {
+        "border": {
+          "radius": "var(--wp--custom--button-radius)",
+          "width": "0"
+        },
+        "color": {
+          "background": "var:preset|color|contrast",
+          "text": "var:preset|color|base"
+        },
+        "spacing": {
+          "padding": {
+            "top": "0.82rem",
+            "right": "1.18rem",
+            "bottom": "0.82rem",
+            "left": "1.18rem"
+          }
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontSize": "0.66rem",
+          "fontWeight": "760",
+          "letterSpacing": "0",
+          "textDecoration": "none",
+          "textTransform": "uppercase"
+        }
+      },
+      "heading": {
+        "color": {
+          "text": "var:preset|color|contrast"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|heading",
+          "fontWeight": "500",
+          "letterSpacing": "0",
+          "lineHeight": "0.98"
+        }
+      },
+      "link": {
+        "color": {
+          "text": "var:preset|color|accent"
+        },
+        "typography": {
+          "textDecoration": "none"
+        }
+      }
+    },
+    "blocks": {
+      "core/navigation": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontSize": "0.68rem",
+          "fontWeight": "650",
+          "textTransform": "none",
+          "letterSpacing": "0"
+        },
+        "color": {
+          "text": "var:preset|color|contrast"
+        }
+      },
+      "core/site-title": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|body",
+          "fontSize": "0.82rem",
+          "fontWeight": "850",
+          "letterSpacing": "0",
+          "lineHeight": "1",
+          "textTransform": "uppercase"
+        },
+        "color": {
+          "text": "var:preset|color|contrast"
+        }
+      },
+      "core/post-title": {
+        "typography": {
+          "fontSize": "var:preset|font-size|xx-large",
+          "lineHeight": "0.98",
+          "fontFamily": "var:preset|font-family|heading",
+          "fontWeight": "500"
+        }
+      },
+      "core/query-title": {
+        "typography": {
+          "fontSize": "var:preset|font-size|xx-large",
+          "fontFamily": "var:preset|font-family|heading",
+          "fontWeight": "500",
+          "lineHeight": "0.98"
+        }
+      },
+      "core/quote": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|heading",
+          "fontSize": "var:preset|font-size|large",
+          "lineHeight": "1.25"
+        }
+      },
+      "woocommerce/product-price": {
+        "color": {
+          "text": "#171412"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontSize": "var:preset|font-size|small",
+          "fontWeight": "760",
+          "textTransform": "uppercase",
+          "letterSpacing": "0"
+        }
+      },
+      "woocommerce/product-button": {
+        "typography": {
+          "fontFamily": "var:preset|font-family|mono",
+          "fontWeight": "800",
+          "textTransform": "uppercase",
+          "letterSpacing": "0"
+        },
+        "border": {
+          "radius": "var(--wp--custom--button-radius)"
+        },
+        "color": {
+          "background": "var:preset|color|contrast",
+          "text": "var:preset|color|base"
+        }
+      },
+      "woocommerce/breadcrumbs": {
+        "color": {
+          "text": "var:preset|color|muted"
+        },
+        "typography": {
+          "fontFamily": "var:preset|font-family|body",
+          "fontSize": "var:preset|font-size|small",
+          "fontWeight": "650",
+          "textTransform": "uppercase"
+        }
+      },
+      "woocommerce/product-meta": {
+        "color": {
+          "text": "var:preset|color|muted"
+        },
+        "typography": {
+          "fontSize": "var:preset|font-size|small"
+        }
+      },
+      "woocommerce/product-rating": {
+        "color": {
+          "text": "var:preset|color|accent-2"
+        }
+      }
+    }
+  }
+}

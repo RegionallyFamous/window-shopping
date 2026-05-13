@@ -1,0 +1,80 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "meta": {
+    "title": "Window Shopping",
+    "description": "A WooCommerce block theme with six dramatically different Site Editor style variations and a seeded sample catalog.",
+    "author": "Regionally Famous"
+  },
+  "preferredVersions": {
+    "wp": "latest",
+    "php": "8.2"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "features": {
+    "networking": true
+  },
+  "landingPage": "/",
+  "login": true,
+  "steps": [
+    {
+      "step": "defineWpConfigConsts",
+      "consts": {
+        "WP_DEBUG": false,
+        "AUTOMATIC_UPDATER_DISABLED": true,
+        "DISALLOW_FILE_MODS": false
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "blogname": "Window Shopping",
+        "blogdescription": "One shop theme, many storefront moods.",
+        "woocommerce_store_address": "1 Storefront Lane",
+        "woocommerce_store_city": "Chicago",
+        "woocommerce_default_country": "US:IL",
+        "woocommerce_store_postcode": "60601",
+        "woocommerce_currency": "USD",
+        "woocommerce_onboarding_profile": {
+          "completed": true,
+          "skipped": true
+        },
+        "woocommerce_task_list_complete": "yes",
+        "woocommerce_coming_soon": "no",
+        "woocommerce_block_theme_has_blockified_templates": "yes",
+        "woocommerce_single_product_block_template": "yes",
+        "permalink_structure": "/%postname%/"
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginData": {
+        "resource": "wordpress.org/plugins",
+        "slug": "woocommerce"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installTheme",
+      "themeData": {
+        "resource": "git:directory",
+        "url": "https://github.com/RegionallyFamous/window-shopping",
+        "ref": "main",
+        "refType": "branch",
+        "path": "/"
+      },
+      "ifAlreadyInstalled": "overwrite",
+      "options": {
+        "activate": true,
+        "targetFolderName": "window-shopping"
+      }
+    },
+    {
+      "step": "runPHP",
+      "code": "<?php\nrequire_once '/wordpress/wp-load.php';\nrequire_once ABSPATH . 'wp-admin/includes/plugin.php';\n\nif ( file_exists( WP_PLUGIN_DIR . '/woocommerce/woocommerce.php' ) && ! is_plugin_active( 'woocommerce/woocommerce.php' ) ) {\n\tactivate_plugin( 'woocommerce/woocommerce.php' );\n}\n\nswitch_theme( 'window-shopping' );\n\n$seed_file = get_theme_file_path( 'playground/seed-window-shopping.php' );\nif ( file_exists( $seed_file ) ) {\n\trequire_once $seed_file;\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+<!-- wp:template-part {"slug":"checkout-header","tagName":"header"} /-->
+
+<!-- wp:group {"tagName":"main","className":"ws-page-shell","style":{"dimensions":{"minHeight":"68vh"},"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|60"}}},"layout":{"type":"constrained"}} -->
+<main class="wp-block-group ws-page-shell" style="min-height:68vh;padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--60)">
+	<!-- wp:woocommerce/order-confirmation-status {"align":"wide"} /-->
+	<!-- wp:woocommerce/order-confirmation-summary {"align":"wide"} /-->
+
+	<!-- wp:columns {"align":"wide","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|50"}}}} -->
+	<div class="wp-block-columns alignwide">
+		<!-- wp:column {"width":"60%"} -->
+		<div class="wp-block-column" style="flex-basis:60%">
+			<!-- wp:woocommerce/order-confirmation-totals-wrapper {"align":"wide"} -->
+			<div class="wp-block-woocommerce-order-confirmation-totals-wrapper alignwide">
+				<!-- wp:woocommerce/order-confirmation-totals /-->
+			</div>
+			<!-- /wp:woocommerce/order-confirmation-totals-wrapper -->
+
+			<!-- wp:woocommerce/order-confirmation-downloads-wrapper {"align":"wide"} -->
+			<div class="wp-block-woocommerce-order-confirmation-downloads-wrapper alignwide">
+				<!-- wp:woocommerce/order-confirmation-downloads /-->
+			</div>
+			<!-- /wp:woocommerce/order-confirmation-downloads-wrapper -->
+		</div>
+		<!-- /wp:column -->
+
+		<!-- wp:column {"width":"40%"} -->
+		<div class="wp-block-column" style="flex-basis:40%">
+			<!-- wp:woocommerce/order-confirmation-billing-wrapper {"align":"wide"} -->
+			<div class="wp-block-woocommerce-order-confirmation-billing-wrapper alignwide">
+				<!-- wp:woocommerce/order-confirmation-billing-address /-->
+			</div>
+			<!-- /wp:woocommerce/order-confirmation-billing-wrapper -->
+
+			<!-- wp:woocommerce/order-confirmation-shipping-wrapper {"align":"wide"} -->
+			<div class="wp-block-woocommerce-order-confirmation-shipping-wrapper alignwide">
+				<!-- wp:woocommerce/order-confirmation-shipping-address /-->
+			</div>
+			<!-- /wp:woocommerce/order-confirmation-shipping-wrapper -->
+		</div>
+		<!-- /wp:column -->
+	</div>
+	<!-- /wp:columns -->
+</main>
+<!-- /wp:group -->
+
+<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
+
