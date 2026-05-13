@@ -319,8 +319,8 @@ function window_shopping_switcher_enqueue_style() {
 					white-space: nowrap;
 				}
 				.window-shopping-style-switcher__link {
-					flex: 1 1 auto;
-					min-width: 0;
+					flex: 0 0 auto;
+					min-inline-size: 2.15rem;
 					padding-right: 0.44rem;
 					padding-left: 0.44rem;
 				}
