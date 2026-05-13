@@ -86,6 +86,12 @@ window_shopping_playground_upsert_page(
 );
 
 window_shopping_playground_upsert_page(
+	'collections',
+	'Collections',
+	'<!-- wp:pattern {"slug":"window-shopping/category-browse"} /-->'
+);
+
+window_shopping_playground_upsert_page(
 	'sample-page',
 	'About',
 	'<!-- wp:paragraph --><p>Window Shopping is a WooCommerce block theme built around expressive storefront styles.</p><!-- /wp:paragraph -->'
@@ -118,20 +124,112 @@ update_option(
 );
 
 /**
- * Resolve or create a product category.
+ * Resolve or create a product taxonomy term.
  *
- * @param string $name Category name.
- * @param string $slug Category slug.
+ * @param string $taxonomy    Taxonomy name.
+ * @param string $name        Term name.
+ * @param string $slug        Term slug.
+ * @param string $description Optional term description.
  * @return int
  */
-function window_shopping_playground_category_id( $name, $slug ) {
-	$term = get_term_by( 'slug', $slug, 'product_cat' );
+function window_shopping_playground_term_id( $taxonomy, $name, $slug, $description = '' ) {
+	$term = get_term_by( 'slug', $slug, $taxonomy );
 	if ( $term ) {
+		if ( $description && $description !== $term->description ) {
+			wp_update_term(
+				(int) $term->term_id,
+				$taxonomy,
+				array( 'description' => $description )
+			);
+		}
+
 		return (int) $term->term_id;
 	}
 
-	$result = wp_insert_term( $name, 'product_cat', array( 'slug' => $slug ) );
+	$result = wp_insert_term(
+		$name,
+		$taxonomy,
+		array(
+			'slug'        => $slug,
+			'description' => $description,
+		)
+	);
 	return is_wp_error( $result ) ? 0 : (int) $result['term_id'];
+}
+
+/**
+ * Resolve or create a product category.
+ *
+ * @param string $name        Category name.
+ * @param string $slug        Category slug.
+ * @param string $description Optional category description.
+ * @return int
+ */
+function window_shopping_playground_category_id( $name, $slug, $description = '' ) {
+	return window_shopping_playground_term_id( 'product_cat', $name, $slug, $description );
+}
+
+/**
+ * Resolve or create a product tag.
+ *
+ * @param string $name        Tag name.
+ * @param string $slug        Tag slug.
+ * @param string $description Optional tag description.
+ * @return int
+ */
+function window_shopping_playground_tag_id( $name, $slug, $description = '' ) {
+	return window_shopping_playground_term_id( 'product_tag', $name, $slug, $description );
+}
+
+/**
+ * Register a global WooCommerce product attribute taxonomy for demo archives.
+ *
+ * @param string $name Attribute label.
+ * @param string $slug Attribute slug without the pa_ prefix.
+ * @return string Taxonomy name.
+ */
+function window_shopping_playground_attribute_taxonomy( $name, $slug ) {
+	if ( ! function_exists( 'wc_create_attribute' ) ) {
+		return '';
+	}
+
+	$slug         = wc_sanitize_taxonomy_name( $slug );
+	$taxonomy     = wc_attribute_taxonomy_name( $slug );
+	$attribute_id = wc_attribute_taxonomy_id_by_name( $slug );
+
+	if ( ! $attribute_id ) {
+		$result = wc_create_attribute(
+			array(
+				'name'         => $name,
+				'slug'         => $slug,
+				'type'         => 'select',
+				'order_by'     => 'menu_order',
+				'has_archives' => true,
+			)
+		);
+
+		if ( is_wp_error( $result ) ) {
+			return '';
+		}
+	}
+
+	delete_transient( 'wc_attribute_taxonomies' );
+
+	if ( ! taxonomy_exists( $taxonomy ) ) {
+		register_taxonomy(
+			$taxonomy,
+			array( 'product' ),
+			array(
+				'hierarchical' => false,
+				'labels'       => array( 'name' => $name ),
+				'public'       => true,
+				'query_var'    => true,
+				'rewrite'      => array( 'slug' => $slug ),
+			)
+		);
+	}
+
+	return $taxonomy;
 }
 
 /**
@@ -290,12 +388,73 @@ function window_shopping_playground_add_review( $product_id, $rating ) {
 }
 
 $categories = array(
-	'studio'       => window_shopping_playground_category_id( 'Studio', 'studio' ),
-	'oddities'    => window_shopping_playground_category_id( 'Oddities', 'oddities' ),
-	'atelier'     => window_shopping_playground_category_id( 'Atelier', 'atelier' ),
-	'field'       => window_shopping_playground_category_id( 'Field Supply', 'field-supply' ),
-	'pantry'      => window_shopping_playground_category_id( 'Pantry', 'pantry' ),
-	'signal'      => window_shopping_playground_category_id( 'Signal', 'signal' ),
+	'studio'       => window_shopping_playground_category_id( 'Studio', 'studio', 'Polished objects, useful tools, and quietly premium everyday goods.' ),
+	'oddities'    => window_shopping_playground_category_id( 'Oddities', 'oddities', 'Curious gifts, strange little finds, and memorable shelf pieces.' ),
+	'atelier'     => window_shopping_playground_category_id( 'Atelier', 'atelier', 'Editorial clothing, soft accessories, and pieces with a studio hand.' ),
+	'field'       => window_shopping_playground_category_id( 'Field Supply', 'field-supply', 'Practical goods for outdoor days, repairs, travel, and weather.' ),
+	'pantry'      => window_shopping_playground_category_id( 'Pantry', 'pantry', 'Provision-minded food, home goods, and counter-ready staples.' ),
+	'signal'      => window_shopping_playground_category_id( 'Signal', 'signal', 'Clean tech, desk accessories, cable systems, and connected essentials.' ),
+);
+
+$tags = array(
+	'new'       => window_shopping_playground_tag_id( 'New arrivals', 'new-arrivals', 'Fresh pieces currently in the front window.' ),
+	'giftable'  => window_shopping_playground_tag_id( 'Giftable', 'giftable', 'Easy-to-give objects with a little personality.' ),
+	'desk'      => window_shopping_playground_tag_id( 'Desk ready', 'desk-ready', 'Small goods for cleaner work surfaces and everyday carry.' ),
+	'field'     => window_shopping_playground_tag_id( 'Field tested', 'field-tested', 'Useful pieces with a practical, durable point of view.' ),
+	'provision' => window_shopping_playground_tag_id( 'Provisions', 'provisions', 'Food and home staples made for regular use.' ),
+);
+
+$mood_taxonomy = window_shopping_playground_attribute_taxonomy( 'Mood', 'mood' );
+$moods         = array();
+
+if ( $mood_taxonomy ) {
+	$moods = array(
+		'calm'      => window_shopping_playground_term_id( $mood_taxonomy, 'Calm', 'calm', 'Quiet, refined pieces for low-noise storefronts.' ),
+		'curious'   => window_shopping_playground_term_id( $mood_taxonomy, 'Curious', 'curious', 'Unusual finds and conversation pieces.' ),
+		'utility'   => window_shopping_playground_term_id( $mood_taxonomy, 'Utility', 'utility', 'Practical goods built around daily function.' ),
+		'provision' => window_shopping_playground_term_id( $mood_taxonomy, 'Provision', 'provision', 'Kitchen, pantry, and home goods with a generous feel.' ),
+		'connected' => window_shopping_playground_term_id( $mood_taxonomy, 'Connected', 'connected', 'Tech-forward pieces with clean, modern behavior.' ),
+	);
+}
+
+$mood_attribute_id = $mood_taxonomy ? wc_attribute_taxonomy_id_by_name( 'mood' ) : 0;
+
+$product_moods = array(
+	'WS-VELVET-TOTE'        => 'calm',
+	'WS-MOON-BOX'           => 'curious',
+	'WS-RIBBON-SHIRT'       => 'calm',
+	'WS-CAMP-JACKET'        => 'utility',
+	'WS-TRAIL-TIN'          => 'utility',
+	'WS-CABLE-PACK'         => 'connected',
+	'WS-DESK-DOCK'          => 'connected',
+	'WS-SIGNAL-DOCK'        => 'connected',
+	'WS-SIGNAL-POUCH'       => 'connected',
+	'WS-SIGNAL-HUB'         => 'connected',
+	'WS-SIGNAL-HEADPHONES'  => 'connected',
+	'WS-BOTTLED-MORNING'    => 'provision',
+	'WS-OIL-DUO'            => 'provision',
+	'WS-CITRUS-CRATE'       => 'provision',
+	'WS-SUNDAY-JAM'         => 'provision',
+	'WS-POCKET-THUNDER'     => 'curious',
+);
+
+$product_tags = array(
+	'WS-VELVET-TOTE'        => array( 'new', 'giftable' ),
+	'WS-MOON-BOX'           => array( 'giftable' ),
+	'WS-RIBBON-SHIRT'       => array( 'new' ),
+	'WS-CAMP-JACKET'        => array( 'field', 'new' ),
+	'WS-TRAIL-TIN'          => array( 'field', 'giftable' ),
+	'WS-CABLE-PACK'         => array( 'desk' ),
+	'WS-DESK-DOCK'          => array( 'desk', 'new' ),
+	'WS-SIGNAL-DOCK'        => array( 'desk' ),
+	'WS-SIGNAL-POUCH'       => array( 'desk', 'giftable' ),
+	'WS-SIGNAL-HUB'         => array( 'desk' ),
+	'WS-SIGNAL-HEADPHONES'  => array( 'desk', 'new' ),
+	'WS-BOTTLED-MORNING'    => array( 'provision', 'giftable' ),
+	'WS-OIL-DUO'            => array( 'provision' ),
+	'WS-CITRUS-CRATE'       => array( 'provision', 'new' ),
+	'WS-SUNDAY-JAM'         => array( 'provision', 'giftable' ),
+	'WS-POCKET-THUNDER'     => array( 'giftable' ),
 );
 
 $products = array(
@@ -364,9 +523,36 @@ foreach ( $products as $item ) {
 	}
 	$product->set_category_ids( array_values( array_unique( $cat_ids ) ) );
 
+	$tag_ids = array();
+	foreach ( isset( $product_tags[ $item['sku'] ] ) ? $product_tags[ $item['sku'] ] : array() as $tag_key ) {
+		if ( ! empty( $tags[ $tag_key ] ) ) {
+			$tag_ids[] = (int) $tags[ $tag_key ];
+		}
+	}
+	$product->set_tag_ids( array_values( array_unique( $tag_ids ) ) );
+
 	$product_id = $product->save();
 	if ( ! $product_id ) {
 		continue;
+	}
+
+	if ( $mood_taxonomy && $mood_attribute_id && ! empty( $product_moods[ $item['sku'] ] ) && ! empty( $moods[ $product_moods[ $item['sku'] ] ] ) ) {
+		$mood_term_id = (int) $moods[ $product_moods[ $item['sku'] ] ];
+		wp_set_object_terms( $product_id, $mood_term_id, $mood_taxonomy, false );
+
+		$product   = wc_get_product( $product_id );
+		$attribute = new WC_Product_Attribute();
+		$attribute->set_id( (int) $mood_attribute_id );
+		$attribute->set_name( $mood_taxonomy );
+		$attribute->set_options( array( $mood_term_id ) );
+		$attribute->set_position( 0 );
+		$attribute->set_visible( true );
+		$attribute->set_variation( false );
+
+		$attributes                    = $product->get_attributes();
+		$attributes[ $mood_taxonomy ]  = $attribute;
+		$product->set_attributes( $attributes );
+		$product->save();
 	}
 
 	$desired_slug = sanitize_title( $item['name'] );
