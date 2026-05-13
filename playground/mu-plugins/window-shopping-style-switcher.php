@@ -1,14 +1,18 @@
 <?php
 /**
  * Plugin Name: Window Shopping Style Switcher
- * Description: Adds a front-end toolbar for switching Window Shopping style variations in demo installs.
- * Version: 0.1.0
+ * Description: Adds a per-browser front-end toolbar for previewing Window Shopping style variations in demo installs.
+ * Version: 0.1.1
  * Author: Regionally Famous
  *
  * @package Window_Shopping
  */
 
 defined( 'ABSPATH' ) || exit;
+
+if ( ! defined( 'WINDOW_SHOPPING_SWITCHER_COOKIE' ) ) {
+	define( 'WINDOW_SHOPPING_SWITCHER_COOKIE', 'window_shopping_style' );
+}
 
 /**
  * Style variations available in the Window Shopping theme.
@@ -36,57 +40,49 @@ function window_shopping_switcher_enabled() {
 }
 
 /**
- * Read the active style slug from the theme helper or the newest global styles post.
+ * Read a valid style slug from the preview cookie.
+ *
+ * @return string
+ */
+function window_shopping_switcher_cookie_slug() {
+	$styles = window_shopping_switcher_styles();
+	if ( empty( $_COOKIE[ WINDOW_SHOPPING_SWITCHER_COOKIE ] ) ) {
+		return '';
+	}
+
+	$slug = sanitize_key( wp_unslash( $_COOKIE[ WINDOW_SHOPPING_SWITCHER_COOKIE ] ) );
+	return isset( $styles[ $slug ] ) ? $slug : '';
+}
+
+/**
+ * Read the active style slug from the preview cookie or theme helper.
  *
  * @return string
  */
 function window_shopping_switcher_active_slug() {
-	$styles = window_shopping_switcher_styles();
-	$option = get_option( 'window_shopping_switcher_active_style', '' );
-	if ( isset( $styles[ $option ] ) ) {
-		return $option;
+	$cookie_slug = window_shopping_switcher_cookie_slug();
+	if ( $cookie_slug ) {
+		return $cookie_slug;
 	}
 
 	if ( function_exists( 'window_shopping_active_style_slug' ) ) {
 		return window_shopping_active_style_slug();
 	}
 
-	$posts  = get_posts(
-		array(
-			'post_type'        => 'wp_global_styles',
-			'post_status'      => 'any',
-			'numberposts'      => 1,
-			'tax_query'        => array(
-				array(
-					'taxonomy' => 'wp_theme',
-					'field'    => 'name',
-					'terms'    => get_stylesheet(),
-				),
-			),
-			'suppress_filters' => false,
-		)
-	);
-
-	if ( empty( $posts ) ) {
-		return 'studio';
-	}
-
-	$data       = json_decode( $posts[0]->post_content, true );
-	$candidates = array(
-		isset( $data['title'] ) ? $data['title'] : '',
-		$posts[0]->post_title,
-		$posts[0]->post_name,
-	);
-
-	foreach ( $candidates as $candidate ) {
-		$slug = sanitize_title( $candidate );
-		if ( isset( $styles[ $slug ] ) ) {
-			return $slug;
-		}
-	}
-
 	return 'studio';
 }
+
+/**
+ * Let theme helpers such as body classes honor the per-browser preview style.
+ *
+ * @param string $slug Active style slug.
+ * @return string
+ */
+function window_shopping_switcher_filter_active_style_slug( $slug ) {
+	$cookie_slug = window_shopping_switcher_cookie_slug();
+	return $cookie_slug ? $cookie_slug : $slug;
+}
+add_filter( 'window_shopping_active_style_slug', 'window_shopping_switcher_filter_active_style_slug' );
 
 /**
  * Load a style variation JSON file.
@@ -124,7 +120,7 @@ function window_shopping_switcher_style_data( $slug ) {
  * @return WP_Theme_JSON_Data
  */
 function window_shopping_switcher_filter_theme_json( $theme_json ) {
-	if ( 'window-shopping' !== get_stylesheet() ) {
+	if ( ! window_shopping_switcher_enabled() ) {
 		return $theme_json;
 	}
 
@@ -138,77 +134,26 @@ function window_shopping_switcher_filter_theme_json( $theme_json ) {
 add_filter( 'wp_theme_json_data_theme', 'window_shopping_switcher_filter_theme_json' );
 
 /**
- * Get the newest global styles post ID for the active theme.
- *
- * @return int
- */
-function window_shopping_switcher_global_styles_post_id() {
-	$posts = get_posts(
-		array(
-			'post_type'        => 'wp_global_styles',
-			'post_status'      => 'any',
-			'numberposts'      => 1,
-			'tax_query'        => array(
-				array(
-					'taxonomy' => 'wp_theme',
-					'field'    => 'name',
-					'terms'    => get_stylesheet(),
-				),
-			),
-			'suppress_filters' => false,
-		)
-	);
-
-	return empty( $posts ) ? 0 : (int) $posts[0]->ID;
-}
-
-/**
- * Apply a style variation by writing it to the active wp_global_styles post.
+ * Store the selected preview style for the current browser.
  *
  * @param string $slug Style variation slug.
- * @return bool
+ * @return void
  */
-function window_shopping_switcher_apply_style( $slug ) {
-	$styles = window_shopping_switcher_styles();
-	if ( ! isset( $styles[ $slug ] ) ) {
-		return false;
-	}
-
-	$data = window_shopping_switcher_style_data( $slug );
-	if ( empty( $data ) ) {
-		return false;
-	}
-
-	$data['isGlobalStylesUserThemeJSON'] = true;
-
-	$post_id = window_shopping_switcher_global_styles_post_id();
-	$post    = array(
-		'post_content' => wp_json_encode( $data, JSON_UNESCAPED_SLASHES ),
-		'post_name'    => $slug,
-		'post_status'  => 'publish',
-		'post_title'   => $styles[ $slug ],
-		'post_type'    => 'wp_global_styles',
+function window_shopping_switcher_set_cookie( $slug ) {
+	$cookie_args = array(
+		'expires'  => time() + MONTH_IN_SECONDS,
+		'path'     => defined( 'COOKIEPATH' ) && COOKIEPATH ? COOKIEPATH : '/',
+		'secure'   => is_ssl(),
+		'httponly' => false,
+		'samesite' => 'Lax',
 	);
 
-	if ( $post_id ) {
-		$post['ID'] = $post_id;
-		$result     = wp_update_post( $post, true );
-	} else {
-		$result = wp_insert_post( $post, true );
+	if ( defined( 'COOKIE_DOMAIN' ) && COOKIE_DOMAIN ) {
+		$cookie_args['domain'] = COOKIE_DOMAIN;
 	}
 
-	if ( is_wp_error( $result ) || ! $result ) {
-		return false;
-	}
-
-	wp_set_object_terms( (int) $result, get_stylesheet(), 'wp_theme' );
-	update_option( 'window_shopping_switcher_active_style', $slug, false );
-
-	if ( class_exists( 'WP_Theme_JSON_Resolver' ) ) {
-		WP_Theme_JSON_Resolver::clean_cached_data();
-	}
-
-	return true;
+	setcookie( WINDOW_SHOPPING_SWITCHER_COOKIE, $slug, $cookie_args );
+	$_COOKIE[ WINDOW_SHOPPING_SWITCHER_COOKIE ] = $slug;
 }
 
 /**
@@ -226,19 +171,15 @@ function window_shopping_switcher_handle_request() {
 		return;
 	}
 
-	$nonce = isset( $_GET['_ws_style_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['_ws_style_nonce'] ) ) : '';
-	if ( ! wp_verify_nonce( $nonce, 'window_shopping_switch_style_' . $slug ) ) {
-		return;
-	}
-
-	window_shopping_switcher_apply_style( $slug );
+	window_shopping_switcher_set_cookie( $slug );
+	delete_option( 'window_shopping_switcher_active_style' );
 
 	wp_safe_redirect(
 		remove_query_arg(
 			array(
-				'window_shopping_style',
-				'_ws_style_nonce',
-			)
+					'window_shopping_style',
+					'_ws_style_nonce',
+				)
 		)
 	);
 	exit;
@@ -367,11 +308,11 @@ function window_shopping_switcher_render() {
 	<nav class="window-shopping-style-switcher" aria-label="<?php esc_attr_e( 'Window Shopping styles', 'window-shopping' ); ?>">
 		<span class="window-shopping-style-switcher__label"><?php esc_html_e( 'Style', 'window-shopping' ); ?></span>
 		<?php foreach ( window_shopping_switcher_styles() as $slug => $label ) : ?>
-			<a
-				class="window-shopping-style-switcher__link"
-				href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'window_shopping_style', $slug ), 'window_shopping_switch_style_' . $slug, '_ws_style_nonce' ) ); ?>"
-				<?php echo $current === $slug ? 'aria-current="true"' : ''; ?>
-			><?php echo esc_html( $label ); ?></a>
+				<a
+					class="window-shopping-style-switcher__link"
+					href="<?php echo esc_url( add_query_arg( 'window_shopping_style', $slug ) ); ?>"
+					<?php echo $current === $slug ? 'aria-current="true"' : ''; ?>
+				><?php echo esc_html( $label ); ?></a>
 		<?php endforeach; ?>
 	</nav>
 	<?php

@@ -212,49 +212,45 @@ function window_shopping_style_slugs() {
 function window_shopping_active_style_slug() {
 	static $active_slug = null;
 
-	if ( null !== $active_slug ) {
-		return $active_slug;
-	}
-
-	$active_slug = 'studio';
-	$valid_slugs = window_shopping_style_slugs();
-	$posts       = get_posts(
-		array(
-			'post_type'      => 'wp_global_styles',
-			'post_status'    => 'any',
-			'numberposts'    => 1,
-			'tax_query'      => array(
-				array(
-					'taxonomy' => 'wp_theme',
-					'field'    => 'name',
-					'terms'    => get_stylesheet(),
+	if ( null === $active_slug ) {
+		$active_slug = 'studio';
+		$valid_slugs = window_shopping_style_slugs();
+		$posts       = get_posts(
+			array(
+				'post_type'        => 'wp_global_styles',
+				'post_status'      => 'any',
+				'numberposts'      => 1,
+				'tax_query'        => array(
+					array(
+						'taxonomy' => 'wp_theme',
+						'field'    => 'name',
+						'terms'    => get_stylesheet(),
+					),
 				),
-			),
-			'suppress_filters' => false,
-		)
-	);
+				'suppress_filters' => false,
+			)
+		);
 
-	if ( empty( $posts ) ) {
-		return $active_slug;
-	}
+		if ( ! empty( $posts ) ) {
+			$data       = json_decode( $posts[0]->post_content, true );
+			$candidates = array(
+				isset( $data['title'] ) ? $data['title'] : '',
+				$posts[0]->post_title,
+				$posts[0]->post_name,
+			);
 
-	$data       = json_decode( $posts[0]->post_content, true );
-	$candidates = array(
-		isset( $data['title'] ) ? $data['title'] : '',
-		$posts[0]->post_title,
-		$posts[0]->post_name,
-	);
+			foreach ( $candidates as $candidate ) {
+				$slug = sanitize_title( $candidate );
 
-	foreach ( $candidates as $candidate ) {
-		$slug = sanitize_title( $candidate );
-
-		if ( in_array( $slug, $valid_slugs, true ) ) {
-			$active_slug = $slug;
-			break;
+				if ( in_array( $slug, $valid_slugs, true ) ) {
+					$active_slug = $slug;
+					break;
+				}
+			}
 		}
 	}
 
-	return $active_slug;
+	return apply_filters( 'window_shopping_active_style_slug', $active_slug );
 }
 
 /**
