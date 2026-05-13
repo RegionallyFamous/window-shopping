@@ -18,6 +18,26 @@ update_option( 'woocommerce_block_theme_has_blockified_templates', 'yes' );
 update_option( 'woocommerce_single_product_block_template', 'yes' );
 update_option( 'permalink_structure', '/%postname%/' );
 
+/**
+ * Install the Playground-only style switcher MU plugin.
+ *
+ * @return void
+ */
+function window_shopping_playground_install_style_switcher() {
+	$source = get_theme_file_path( 'playground/mu-plugins/window-shopping-style-switcher.php' );
+	if ( ! file_exists( $source ) || ! defined( 'WPMU_PLUGIN_DIR' ) ) {
+		return;
+	}
+
+	if ( ! is_dir( WPMU_PLUGIN_DIR ) && ! wp_mkdir_p( WPMU_PLUGIN_DIR ) ) {
+		return;
+	}
+
+	copy( $source, trailingslashit( WPMU_PLUGIN_DIR ) . 'window-shopping-style-switcher.php' );
+}
+
+window_shopping_playground_install_style_switcher();
+
 if ( ! class_exists( 'WC_Install' ) && defined( 'WC_ABSPATH' ) ) {
 	require_once WC_ABSPATH . 'includes/class-wc-install.php';
 }
@@ -126,6 +146,8 @@ function window_shopping_playground_sideload_image( $filename, $product_id ) {
 		return 0;
 	}
 
+	$image_version = '2026-05-13-2400-woo-sizes';
+
 	require_once ABSPATH . 'wp-admin/includes/file.php';
 	require_once ABSPATH . 'wp-admin/includes/media.php';
 	require_once ABSPATH . 'wp-admin/includes/image.php';
@@ -133,7 +155,7 @@ function window_shopping_playground_sideload_image( $filename, $product_id ) {
 	$existing = get_posts(
 		array(
 			'post_type'      => 'attachment',
-			'posts_per_page' => 1,
+			'posts_per_page' => -1,
 			'fields'         => 'ids',
 			'meta_key'       => '_window_shopping_sample_image',
 			'meta_value'     => $filename,
@@ -141,7 +163,13 @@ function window_shopping_playground_sideload_image( $filename, $product_id ) {
 	);
 
 	if ( ! empty( $existing ) ) {
-		return (int) $existing[0];
+		foreach ( $existing as $attachment_id ) {
+			if ( $image_version === get_post_meta( $attachment_id, '_window_shopping_sample_image_version', true ) ) {
+				return (int) $attachment_id;
+			}
+
+			wp_delete_attachment( (int) $attachment_id, true );
+		}
 	}
 
 	$tmp = wp_tempnam( $filename );
@@ -163,6 +191,7 @@ function window_shopping_playground_sideload_image( $filename, $product_id ) {
 	}
 
 	update_post_meta( $attachment_id, '_window_shopping_sample_image', $filename );
+	update_post_meta( $attachment_id, '_window_shopping_sample_image_version', $image_version );
 	return (int) $attachment_id;
 }
 
@@ -242,6 +271,13 @@ $products = array(
 
 foreach ( $products as $item ) {
 	$product_id = wc_get_product_id_by_sku( $item['sku'] );
+	if ( ! $product_id ) {
+		$legacy_product = get_page_by_path( sanitize_title( $item['name'] ), OBJECT, 'product' );
+		if ( $legacy_product instanceof WP_Post ) {
+			$product_id = (int) $legacy_product->ID;
+		}
+	}
+
 	$product    = $product_id ? wc_get_product( $product_id ) : new WC_Product_Simple();
 
 	if ( ! $product instanceof WC_Product ) {
@@ -272,17 +308,30 @@ foreach ( $products as $item ) {
 		continue;
 	}
 
-	if ( ! $product->get_image_id() ) {
-		$image_id = window_shopping_playground_sideload_image( $item['image'], $product_id );
-		if ( $image_id ) {
-			$product = wc_get_product( $product_id );
-			$product->set_image_id( $image_id );
-			$product->save();
+	$desired_slug = sanitize_title( $item['name'] );
+	$legacy_post  = get_page_by_path( $desired_slug, OBJECT, 'product' );
+	if ( $legacy_post instanceof WP_Post && (int) $legacy_post->ID !== (int) $product_id ) {
+		$legacy_product = wc_get_product( $legacy_post->ID );
+		$legacy_sku     = $legacy_product instanceof WC_Product ? $legacy_product->get_sku() : '';
+		if ( '' === $legacy_sku || $legacy_sku !== $item['sku'] ) {
+			wp_delete_post( $legacy_post->ID, true );
+			wp_update_post(
+				array(
+					'ID'        => $product_id,
+					'post_name' => $desired_slug,
+				)
+			);
 		}
+	}
+
+	$image_id = window_shopping_playground_sideload_image( $item['image'], $product_id );
+	if ( $image_id && (int) $product->get_image_id() !== $image_id ) {
+		$product = wc_get_product( $product_id );
+		$product->set_image_id( $image_id );
+		$product->save();
 	}
 
 	window_shopping_playground_add_review( $product_id, $item['rating'] );
 }
 
 flush_rewrite_rules();
-

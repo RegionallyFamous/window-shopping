@@ -1064,6 +1064,17 @@ select.orderby,
   align-items: flex-start !important;
 }
 
+.ws-product-layout.alignfull {
+  box-sizing: border-box;
+  max-width: var(--wp--custom--window--product-layout-max-width, 1680px) !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+.ws-product-layout > .wp-block-column {
+  min-width: 0;
+}
+
 .ws-product-summary {
   padding-top: var(--wp--custom--window--product-summary-padding-top, var(--wp--preset--spacing--30));
 }
@@ -1723,6 +1734,13 @@ select.orderby,
   .wp-block-woocommerce-order-confirmation-totals-wrapper :where(th:last-child, td:last-child) {
     padding-right: 0.85rem;
     padding-left: 0.35rem;
+  }
+
+  .ws-product-layout.alignfull {
+    width: 100% !important;
+    max-width: var(--ws-mobile-measure) !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
   }
 
   .ws-product-summary {

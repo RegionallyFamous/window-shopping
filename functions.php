@@ -131,6 +131,34 @@ function window_shopping_register_block_styles() {
 add_action( 'init', 'window_shopping_register_block_styles' );
 
 /**
+ * Use larger WooCommerce-generated images for the roomy product layouts.
+ *
+ * @return array{width:int,height:int,crop:int}
+ */
+function window_shopping_woocommerce_single_image_size() {
+	return array(
+		'width'  => 1600,
+		'height' => 1600,
+		'crop'   => 1,
+	);
+}
+add_filter( 'woocommerce_get_image_size_single', 'window_shopping_woocommerce_single_image_size' );
+
+/**
+ * Keep archive thumbnails crisp on dense product grids and high-DPI screens.
+ *
+ * @return array{width:int,height:int,crop:int}
+ */
+function window_shopping_woocommerce_thumbnail_image_size() {
+	return array(
+		'width'  => 900,
+		'height' => 900,
+		'crop'   => 1,
+	);
+}
+add_filter( 'woocommerce_get_image_size_thumbnail', 'window_shopping_woocommerce_thumbnail_image_size' );
+
+/**
  * Enqueue the small CSS layer used for WooCommerce runtime polish.
  *
  * @return void

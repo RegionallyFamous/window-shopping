@@ -20,4 +20,5 @@ https://playground.wordpress.net/?blueprint-url=https://raw.githubusercontent.co
 
 The Playground blueprint installs WooCommerce, installs this theme from the
 repository, activates it, creates the core WooCommerce pages, and seeds the
-demo catalog using the bundled sample product images.
+demo catalog using the bundled sample product images. It also installs a small
+MU plugin that adds a front-end style switcher for the six storefront moods.
