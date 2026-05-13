@@ -222,6 +222,28 @@ function window_shopping_playground_cleanup_sample_images( $filenames ) {
 }
 
 /**
+ * Assign real product images to the demo WooCommerce categories.
+ *
+ * @param array<string, int>    $categories            Category IDs keyed by demo category.
+ * @param array<string, int>    $image_ids_by_filename Attachment IDs keyed by source filename.
+ * @param array<string, string> $category_thumbnails   Source filenames keyed by demo category.
+ * @return void
+ */
+function window_shopping_playground_assign_category_thumbnails( $categories, $image_ids_by_filename, $category_thumbnails ) {
+	foreach ( $category_thumbnails as $category_key => $filename ) {
+		if ( empty( $categories[ $category_key ] ) || empty( $image_ids_by_filename[ $filename ] ) ) {
+			continue;
+		}
+
+		update_term_meta(
+			(int) $categories[ $category_key ],
+			'thumbnail_id',
+			(int) $image_ids_by_filename[ $filename ]
+		);
+	}
+}
+
+/**
  * Add a small demo review so product rating blocks have real content.
  *
  * @param int $product_id Product ID.
@@ -295,7 +317,18 @@ $products = array(
 	array( 'sku' => 'WS-POCKET-THUNDER', 'name' => 'Pocket Thunder', 'price' => '18', 'image' => 'pocket-thunder.jpg', 'cats' => array( 'oddities', 'field' ), 'rating' => 5, 'short' => 'A tiny strange object with an unreasonable amount of personality.' ),
 );
 
+$category_thumbnails = array(
+	'studio'   => 'velvet-utility-tote.jpg',
+	'oddities' => 'pocket-thunder.jpg',
+	'atelier'  => 'ribbon-hem-shirt.jpg',
+	'field'    => 'camp-ledger-jacket.jpg',
+	'pantry'   => 'market-citrus-crate.jpg',
+	'signal'   => 'signal-charging-dock.jpg',
+);
+
 window_shopping_playground_cleanup_sample_images( wp_list_pluck( $products, 'image' ) );
+
+$image_ids_by_filename = array();
 
 foreach ( $products as $item ) {
 	$product_id = wc_get_product_id_by_sku( $item['sku'] );
@@ -353,6 +386,10 @@ foreach ( $products as $item ) {
 	}
 
 	$image_id = window_shopping_playground_sideload_image( $item['image'], $product_id );
+	if ( $image_id ) {
+		$image_ids_by_filename[ $item['image'] ] = $image_id;
+	}
+
 	if ( $image_id && (int) $product->get_image_id() !== $image_id ) {
 		$product = wc_get_product( $product_id );
 		$product->set_image_id( $image_id );
@@ -361,5 +398,7 @@ foreach ( $products as $item ) {
 
 	window_shopping_playground_add_review( $product_id, $item['rating'] );
 }
+
+window_shopping_playground_assign_category_thumbnails( $categories, $image_ids_by_filename, $category_thumbnails );
 
 flush_rewrite_rules();

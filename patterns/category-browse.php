@@ -28,9 +28,9 @@
 
 		<!-- wp:column {"width":"66%"} -->
 		<div class="wp-block-column" style="flex-basis:66%">
-			<!-- wp:group {"className":"ws-surface","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50"}},"border":{"color":"var:preset|color|muted","width":"1px","radius":"var(--wp--custom--radius)"},"shadow":"var:preset|shadow|crisp"},"layout":{"type":"constrained"},"backgroundColor":"surface"} -->
-			<div class="wp-block-group ws-surface has-surface-background-color has-background" style="border-color:var(--wp--preset--color--muted);border-width:1px;border-radius:var(--wp--custom--radius);box-shadow:var(--wp--preset--shadow--crisp);padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
-				<!-- wp:woocommerce/product-categories {"hasCount":true,"hasImage":true,"isHierarchical":true} /-->
+			<!-- wp:group {"className":"ws-surface ws-category-browse-panel","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|50","bottom":"var:preset|spacing|50","left":"var:preset|spacing|50"}},"border":{"color":"var:preset|color|muted","width":"1px","radius":"var(--wp--custom--radius)"},"shadow":"var:preset|shadow|crisp"},"layout":{"type":"constrained"},"backgroundColor":"surface"} -->
+			<div class="wp-block-group ws-surface ws-category-browse-panel has-surface-background-color has-background" style="border-color:var(--wp--preset--color--muted);border-width:1px;border-radius:var(--wp--custom--radius);box-shadow:var(--wp--preset--shadow--crisp);padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--50)">
+				<!-- wp:woocommerce/product-categories {"hasCount":true,"hasImage":true,"isHierarchical":true,"className":"ws-category-tiles"} /-->
 			</div>
 			<!-- /wp:group -->
 		</div>
@@ -39,4 +39,3 @@
 	<!-- /wp:columns -->
 </div>
 <!-- /wp:group -->
-
