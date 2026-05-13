@@ -2,7 +2,7 @@
   "$schema": "https://playground.wordpress.net/blueprint-schema.json",
   "meta": {
     "title": "Window Shopping",
-    "description": "A WooCommerce block theme with six dramatically different Site Editor style variations and a seeded sample catalog.",
+    "description": "A WooCommerce block theme with six dramatically different Site Editor style variations, merchandised category tiles, and a seeded sample catalog.",
     "author": "Regionally Famous"
   },
   "preferredVersions": {

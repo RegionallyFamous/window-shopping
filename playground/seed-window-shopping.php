@@ -86,12 +86,6 @@ window_shopping_playground_upsert_page(
 );
 
 window_shopping_playground_upsert_page(
-	'collections',
-	'Collections',
-	'<!-- wp:pattern {"slug":"window-shopping/category-browse"} /-->'
-);
-
-window_shopping_playground_upsert_page(
 	'sample-page',
 	'About',
 	'<!-- wp:paragraph --><p>Window Shopping is a WooCommerce block theme built around expressive storefront styles.</p><!-- /wp:paragraph -->'
@@ -327,9 +321,17 @@ function window_shopping_playground_cleanup_sample_images( $filenames ) {
  * @param array<string, string> $category_thumbnails   Source filenames keyed by demo category.
  * @return void
  */
-function window_shopping_playground_assign_category_thumbnails( $categories, $image_ids_by_filename, $category_thumbnails ) {
+function window_shopping_playground_assign_category_thumbnails( $categories, &$image_ids_by_filename, $category_thumbnails ) {
 	foreach ( $category_thumbnails as $category_key => $filename ) {
-		if ( empty( $categories[ $category_key ] ) || empty( $image_ids_by_filename[ $filename ] ) ) {
+		if ( empty( $categories[ $category_key ] ) || empty( $filename ) ) {
+			continue;
+		}
+
+		if ( empty( $image_ids_by_filename[ $filename ] ) ) {
+			$image_ids_by_filename[ $filename ] = window_shopping_playground_sideload_image( $filename, 0 );
+		}
+
+		if ( empty( $image_ids_by_filename[ $filename ] ) ) {
 			continue;
 		}
 
@@ -338,6 +340,25 @@ function window_shopping_playground_assign_category_thumbnails( $categories, $im
 			'thumbnail_id',
 			(int) $image_ids_by_filename[ $filename ]
 		);
+	}
+}
+
+/**
+ * Remove the empty WooCommerce placeholder category from browse blocks.
+ *
+ * @return void
+ */
+function window_shopping_playground_remove_empty_placeholder_category() {
+	$placeholder = get_term_by( 'slug', 'uncategorized', 'product_cat' );
+	if ( ! $placeholder ) {
+		return;
+	}
+
+	wp_update_term_count_now( array( (int) $placeholder->term_id ), 'product_cat' );
+	$placeholder = get_term_by( 'id', (int) $placeholder->term_id, 'product_cat' );
+
+	if ( $placeholder && 0 === (int) $placeholder->count ) {
+		wp_delete_term( (int) $placeholder->term_id, 'product_cat' );
 	}
 }
 
@@ -387,13 +408,84 @@ function window_shopping_playground_add_review( $product_id, $rating ) {
 	wc_delete_product_transients( $product_id );
 }
 
-$categories = array(
-	'studio'       => window_shopping_playground_category_id( 'Studio', 'studio', 'Polished objects, useful tools, and quietly premium everyday goods.' ),
-	'oddities'    => window_shopping_playground_category_id( 'Oddities', 'oddities', 'Curious gifts, strange little finds, and memorable shelf pieces.' ),
-	'atelier'     => window_shopping_playground_category_id( 'Atelier', 'atelier', 'Editorial clothing, soft accessories, and pieces with a studio hand.' ),
-	'field'       => window_shopping_playground_category_id( 'Field Supply', 'field-supply', 'Practical goods for outdoor days, repairs, travel, and weather.' ),
-	'pantry'      => window_shopping_playground_category_id( 'Pantry', 'pantry', 'Provision-minded food, home goods, and counter-ready staples.' ),
-	'signal'      => window_shopping_playground_category_id( 'Signal', 'signal', 'Clean tech, desk accessories, cable systems, and connected essentials.' ),
+$category_definitions = array(
+	'studio'   => array(
+		'name'        => 'Studio',
+		'slug'        => 'studio',
+		'description' => 'A polished edit of display-worthy totes, desktop tools, keepsake storage, and counter pieces for stores that lead with calm utility.',
+		'thumbnail'   => 'velvet-utility-tote.jpg',
+	),
+	'oddities' => array(
+		'name'        => 'Oddities',
+		'slug'        => 'oddities',
+		'description' => 'Curious gifts and conversation objects with enough charm to anchor a shop window, a gift guide, or a strange little shelf.',
+		'thumbnail'   => 'pocket-thunder.jpg',
+	),
+	'atelier'  => array(
+		'name'        => 'Atelier',
+		'slug'        => 'atelier',
+		'description' => 'Soft goods with an editorial hand: layered clothing, textured accessories, and fabric-led pieces that make product grids feel styled.',
+		'thumbnail'   => 'ribbon-hem-shirt.jpg',
+	),
+	'field'    => array(
+		'name'        => 'Field Supply',
+		'slug'        => 'field-supply',
+		'description' => 'Durable jackets, repair tins, and practical carry goods for storefronts built around travel, weather, workshops, and outdoor days.',
+		'thumbnail'   => 'camp-ledger-jacket.jpg',
+	),
+	'pantry'   => array(
+		'name'        => 'Pantry',
+		'slug'        => 'pantry',
+		'description' => 'Bright provisions, finishing oils, jam sets, and counter-ready staples for food shops, market displays, and generous home goods edits.',
+		'thumbnail'   => 'market-citrus-crate.jpg',
+	),
+	'signal'   => array(
+		'name'        => 'Signal',
+		'slug'        => 'signal',
+		'description' => 'Clean tech accessories, charging docks, cable systems, and compact desk gear for modern stores with a sharper connected edge.',
+		'thumbnail'   => 'signal-charging-dock.jpg',
+	),
+);
+
+$categories          = array();
+$category_thumbnails = array();
+
+foreach ( $category_definitions as $category_key => $category ) {
+	$categories[ $category_key ] = window_shopping_playground_category_id(
+		$category['name'],
+		$category['slug'],
+		$category['description']
+	);
+
+	$category_thumbnails[ $category_key ] = $category['thumbnail'];
+}
+
+if ( ! empty( $categories['studio'] ) ) {
+	update_option( 'default_product_cat', (int) $categories['studio'] );
+}
+
+$collection_intro = '<!-- wp:group {"align":"full","className":"ws-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|60","bottom":"0"}}},"layout":{"type":"constrained"}} -->'
+	. '<div class="wp-block-group alignfull ws-section" style="padding-top:var(--wp--preset--spacing--60);padding-bottom:0">'
+	. '<!-- wp:group {"align":"wide","layout":{"type":"constrained","justifyContent":"left","contentSize":"720px"}} -->'
+	. '<div class="wp-block-group alignwide">'
+	. '<!-- wp:paragraph {"className":"ws-kicker","style":{"typography":{"fontWeight":"760","letterSpacing":"0","textTransform":"uppercase"}},"textColor":"accent","fontFamily":"mono","fontSize":"small"} -->'
+	. '<p class="ws-kicker has-accent-color has-text-color has-mono-font-family has-small-font-size" style="font-weight:760;letter-spacing:0;text-transform:uppercase">Collections</p>'
+	. '<!-- /wp:paragraph -->'
+	. '<!-- wp:heading {"level":1,"fontSize":"xx-large"} -->'
+	. '<h1 class="wp-block-heading has-xx-large-font-size">Six shelves, six storefront moods.</h1>'
+	. '<!-- /wp:heading -->'
+	. '<!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|muted"}}} -->'
+	. '<p class="has-text-color" style="color:var(--wp--preset--color--muted)">Each seeded category has its own product story and a real catalog image, so the browse grid works as merchandising instead of a placeholder taxonomy list.</p>'
+	. '<!-- /wp:paragraph -->'
+	. '</div>'
+	. '<!-- /wp:group -->'
+	. '</div>'
+	. '<!-- /wp:group -->';
+
+window_shopping_playground_upsert_page(
+	'collections',
+	'Collections',
+	$collection_intro . '<!-- wp:pattern {"slug":"window-shopping/category-browse"} /-->'
 );
 
 $tags = array(
@@ -476,16 +568,12 @@ $products = array(
 	array( 'sku' => 'WS-POCKET-THUNDER', 'name' => 'Pocket Thunder', 'price' => '18', 'image' => 'pocket-thunder.jpg', 'cats' => array( 'oddities', 'field' ), 'rating' => 5, 'short' => 'A tiny strange object with an unreasonable amount of personality.' ),
 );
 
-$category_thumbnails = array(
-	'studio'   => 'velvet-utility-tote.jpg',
-	'oddities' => 'pocket-thunder.jpg',
-	'atelier'  => 'ribbon-hem-shirt.jpg',
-	'field'    => 'camp-ledger-jacket.jpg',
-	'pantry'   => 'market-citrus-crate.jpg',
-	'signal'   => 'signal-charging-dock.jpg',
+window_shopping_playground_cleanup_sample_images(
+	array_merge(
+		wp_list_pluck( $products, 'image' ),
+		array_values( $category_thumbnails )
+	)
 );
-
-window_shopping_playground_cleanup_sample_images( wp_list_pluck( $products, 'image' ) );
 
 $image_ids_by_filename = array();
 
@@ -586,5 +674,6 @@ foreach ( $products as $item ) {
 }
 
 window_shopping_playground_assign_category_thumbnails( $categories, $image_ids_by_filename, $category_thumbnails );
+window_shopping_playground_remove_empty_placeholder_category();
 
 flush_rewrite_rules();

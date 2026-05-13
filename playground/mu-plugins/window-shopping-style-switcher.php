@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Window Shopping Style Switcher
  * Description: Adds a per-browser front-end toolbar for previewing Window Shopping style variations in demo installs.
- * Version: 0.1.1
+ * Version: 0.1.3
  * Author: Regionally Famous
  *
  * @package Window_Shopping
@@ -134,6 +134,21 @@ function window_shopping_switcher_filter_theme_json( $theme_json ) {
 add_filter( 'wp_theme_json_data_theme', 'window_shopping_switcher_filter_theme_json' );
 
 /**
+ * Short visible labels for tight demo-toolbar viewports.
+ *
+ * @param string $slug  Style variation slug.
+ * @param string $label Full style variation label.
+ * @return string
+ */
+function window_shopping_switcher_short_label( $slug, $label ) {
+	$short_labels = array(
+		'field-supply' => 'Field',
+	);
+
+	return isset( $short_labels[ $slug ] ) ? $short_labels[ $slug ] : $label;
+}
+
+/**
  * Store the selected preview style for the current browser.
  *
  * @param string $slug Style variation slug.
@@ -211,82 +226,113 @@ function window_shopping_switcher_enqueue_style() {
 		return;
 	}
 
-	wp_register_style( 'window-shopping-style-switcher', false, array(), '0.1.0' );
+	wp_register_style( 'window-shopping-style-switcher', false, array(), '0.1.3' );
 	wp_enqueue_style( 'window-shopping-style-switcher' );
 	wp_add_inline_style(
 		'window-shopping-style-switcher',
 		'
-		.window-shopping-style-switcher {
-			position: sticky;
-			top: 0;
-			z-index: 99999;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 0.45rem;
-			min-height: 42px;
-			padding: 0.45rem 1rem;
-			background: #11100e;
-			color: #fffdf8;
-			box-sizing: border-box;
-			box-shadow: 0 1px 0 rgba(255, 255, 255, 0.16) inset, 0 12px 30px rgba(0, 0, 0, 0.18);
-			font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-			font-size: 12px;
-			font-weight: 700;
-			line-height: 1;
+			.window-shopping-style-switcher {
+				position: sticky;
+				top: 0;
+				z-index: 60;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.35rem;
+				min-height: 34px;
+				max-width: 100%;
+				padding: 0.28rem 0.85rem;
+				border-bottom: 1px solid rgba(255, 253, 248, 0.12);
+				background: rgba(17, 16, 14, 0.94);
+				color: #fffdf8;
+				box-sizing: border-box;
+				box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+				backdrop-filter: blur(14px);
+				font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+				font-size: 11px;
+				font-weight: 700;
+				line-height: 1;
+			}
+			.window-shopping-style-switcher__label {
+				margin-right: 0.25rem;
+				color: rgba(255, 253, 248, 0.68);
+				text-transform: uppercase;
+				white-space: nowrap;
 		}
-		.window-shopping-style-switcher__label {
-			margin-right: 0.35rem;
-			color: rgba(255, 253, 248, 0.68);
-			text-transform: uppercase;
-			white-space: nowrap;
-		}
-		.window-shopping-style-switcher__link {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			min-height: 28px;
-			padding: 0 0.72rem;
-			border: 1px solid rgba(255, 253, 248, 0.24);
-			border-radius: 999px;
-			color: #fffdf8;
-			text-decoration: none;
-			white-space: nowrap;
-		}
-		.window-shopping-style-switcher__link:hover,
-		.window-shopping-style-switcher__link[aria-current="true"] {
+			.window-shopping-style-switcher__link {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 24px;
+				padding: 0 0.62rem;
+				border: 1px solid rgba(255, 253, 248, 0.24);
+				border-radius: 999px;
+				color: #fffdf8;
+				text-decoration: none;
+				white-space: nowrap;
+			}
+			.window-shopping-style-switcher__short {
+				display: none;
+			}
+			.window-shopping-style-switcher__link:hover,
+			.window-shopping-style-switcher__link[aria-current="true"] {
 			border-color: #fffdf8;
 			background: #fffdf8;
 			color: #11100e;
-		}
-		.window-shopping-has-style-switcher .ws-site-header {
-			top: 42px;
-		}
-		.admin-bar .window-shopping-style-switcher {
-			top: 32px;
-		}
-		.admin-bar.window-shopping-has-style-switcher .ws-site-header {
-			top: 74px;
-		}
+			}
+			.window-shopping-has-style-switcher .ws-site-header {
+				top: 34px;
+			}
+			.admin-bar .window-shopping-style-switcher {
+				top: 32px;
+			}
+			.admin-bar.window-shopping-has-style-switcher .ws-site-header {
+				top: 66px;
+			}
 		@media (max-width: 782px) {
 			.admin-bar .window-shopping-style-switcher {
 				top: 46px;
+				}
+				.admin-bar.window-shopping-has-style-switcher .ws-site-header {
+					top: 80px;
+				}
 			}
-			.admin-bar.window-shopping-has-style-switcher .ws-site-header {
-				top: 88px;
-			}
-		}
-		@media (max-width: 640px) {
-			.window-shopping-style-switcher {
-				justify-content: flex-start;
-				overflow-x: auto;
-				padding-right: 1rem;
-				padding-left: 1rem;
-				scrollbar-width: none;
-			}
-			.window-shopping-style-switcher::-webkit-scrollbar {
-				display: none;
-			}
+			@media (max-width: 640px) {
+				.window-shopping-style-switcher {
+					gap: 0.28rem;
+					justify-content: flex-start;
+					overflow-x: auto;
+					overscroll-behavior-x: contain;
+					padding-right: 0.45rem;
+					padding-left: 0.45rem;
+					scroll-padding-inline: 0.45rem;
+					scrollbar-width: none;
+					-webkit-overflow-scrolling: touch;
+					font-size: clamp(9px, 2.65vw, 11px);
+				}
+				.window-shopping-style-switcher__label {
+					position: absolute;
+					width: 1px;
+					height: 1px;
+					overflow: hidden;
+					clip: rect(0, 0, 0, 0);
+					white-space: nowrap;
+				}
+				.window-shopping-style-switcher__link {
+					flex: 1 1 auto;
+					min-width: 0;
+					padding-right: 0.44rem;
+					padding-left: 0.44rem;
+				}
+				.window-shopping-style-switcher__text {
+					display: none;
+				}
+				.window-shopping-style-switcher__short {
+					display: inline;
+				}
+				.window-shopping-style-switcher::-webkit-scrollbar {
+					display: none;
+				}
 		}
 		'
 	);
@@ -311,9 +357,13 @@ function window_shopping_switcher_render() {
 				<a
 					class="window-shopping-style-switcher__link"
 					href="<?php echo esc_url( add_query_arg( 'window_shopping_style', $slug ) ); ?>"
+					aria-label="<?php echo esc_attr( $label ); ?>"
 					<?php echo $current === $slug ? 'aria-current="true"' : ''; ?>
-				><?php echo esc_html( $label ); ?></a>
-		<?php endforeach; ?>
+				>
+					<span class="window-shopping-style-switcher__text"><?php echo esc_html( $label ); ?></span>
+					<span class="window-shopping-style-switcher__short" aria-hidden="true"><?php echo esc_html( window_shopping_switcher_short_label( $slug, $label ) ); ?></span>
+				</a>
+			<?php endforeach; ?>
 	</nav>
 	<?php
 }

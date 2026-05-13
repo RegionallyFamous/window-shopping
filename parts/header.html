@@ -1,7 +1,7 @@
 <!-- wp:group {"tagName":"header","align":"full","className":"ws-site-header","style":{"border":{"bottom":{"color":"var:preset|color|muted","width":"1px"}}},"backgroundColor":"base","layout":{"type":"constrained"}} -->
 <header class="wp-block-group alignfull ws-site-header has-base-background-color has-background" style="border-bottom-color:var(--wp--preset--color--muted);border-bottom-width:1px">
-	<!-- wp:group {"align":"wide","className":"ws-top-bar","style":{"border":{"bottom":{"color":"var:preset|color|muted","width":"1px"}},"dimensions":{"minHeight":"2.1rem"}},"textColor":"muted","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group alignwide ws-top-bar has-muted-color has-text-color" style="border-bottom-color:var(--wp--preset--color--muted);border-bottom-width:1px;min-height:2.1rem">
+	<!-- wp:group {"align":"wide","className":"ws-top-bar","style":{"border":{"bottom":{"color":"var:preset|color|muted","width":"1px"}},"dimensions":{"minHeight":"var(--wp--custom--window--top-bar-min-height)"}},"textColor":"muted","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group alignwide ws-top-bar has-muted-color has-text-color" style="border-bottom-color:var(--wp--preset--color--muted);border-bottom-width:1px;min-height:var(--wp--custom--window--top-bar-min-height)">
 		<!-- wp:paragraph {"style":{"spacing":{"margin":{"top":"0","bottom":"0"}},"typography":{"textTransform":"uppercase"}},"fontFamily":"mono","fontSize":"small"} -->
 		<p class="has-mono-font-family has-small-font-size" style="margin-top:0;margin-bottom:0;text-transform:uppercase">One shop theme, many storefront moods.</p>
 		<!-- /wp:paragraph -->
@@ -12,12 +12,12 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:group {"align":"wide","className":"ws-site-header__inner","style":{"dimensions":{"minHeight":"3.9rem"},"spacing":{"padding":{"top":"0.85rem","bottom":"0.85rem"}}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
-	<div class="wp-block-group alignwide ws-site-header__inner" style="min-height:3.9rem;padding-top:0.85rem;padding-bottom:0.85rem">
+	<!-- wp:group {"align":"wide","className":"ws-site-header__inner","style":{"dimensions":{"minHeight":"var(--wp--custom--window--header-inner-min-height)"},"spacing":{"padding":{"top":"var(--wp--custom--window--header-inner-padding-y)","bottom":"var(--wp--custom--window--header-inner-padding-y)"}}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between","verticalAlignment":"center"}} -->
+	<div class="wp-block-group alignwide ws-site-header__inner" style="min-height:var(--wp--custom--window--header-inner-min-height);padding-top:var(--wp--custom--window--header-inner-padding-y);padding-bottom:var(--wp--custom--window--header-inner-padding-y)">
 		<!-- wp:group {"className":"ws-site-brand","layout":{"type":"flex","flexWrap":"nowrap","verticalAlignment":"center"}} -->
 		<div class="wp-block-group ws-site-brand">
 			<!-- wp:site-logo {"width":40,"shouldSyncIcon":true} /-->
-			<!-- wp:site-title {"level":0,"style":{"typography":{"fontSize":"1.1rem"}}} /-->
+			<!-- wp:site-title {"level":0,"style":{"typography":{"fontSize":"var(--wp--custom--window--brand-font-size)"}}} /-->
 		</div>
 		<!-- /wp:group -->
 
@@ -28,7 +28,7 @@
 			<!-- wp:navigation-link {"label":"About","url":"/sample-page/"} /-->
 		<!-- /wp:navigation -->
 
-		<!-- wp:group {"className":"ws-site-actions","style":{"spacing":{"blockGap":"0.65rem"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right","verticalAlignment":"center"}} -->
+		<!-- wp:group {"className":"ws-site-actions","style":{"spacing":{"blockGap":"var(--wp--custom--window--header-actions-gap)"}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right","verticalAlignment":"center"}} -->
 		<div class="wp-block-group ws-site-actions">
 			<!-- wp:search {"label":"Search","showLabel":false,"buttonText":"Search","buttonPosition":"button-only","buttonUseIcon":true,"className":"ws-site-search"} /-->
 			<!-- wp:woocommerce/customer-account {"className":"is-style-icon-only-entry"} /-->

@@ -33,8 +33,8 @@
 	</div>
 	<!-- /wp:group -->
 
-	<!-- wp:woocommerce/product-collection {"queryId":20,"query":{"perPage":6,"pages":0,"offset":0,"postType":"product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{},"isProductCollectionBlock":true,"featured":false,"woocommerceOnSale":false,"woocommerceStockStatus":["instock","outofstock","onbackorder"],"woocommerceAttributes":[],"woocommerceHandPickedProducts":[],"filterable":false},"tagName":"div","displayLayout":{"type":"flex","columns":4,"shrinkColumns":true},"dimensions":{"widthType":"fill"},"queryContextIncludes":["collection"],"align":"wide","className":"ws-product-grid is-style-editorial-magazine"} -->
-	<div class="wp-block-woocommerce-product-collection alignwide ws-product-grid is-style-editorial-magazine">
+	<!-- wp:woocommerce/product-collection {"queryId":20,"query":{"perPage":4,"pages":0,"offset":0,"postType":"product","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{},"isProductCollectionBlock":true,"featured":false,"woocommerceOnSale":false,"woocommerceStockStatus":["instock","outofstock","onbackorder"],"woocommerceAttributes":[],"woocommerceHandPickedProducts":[],"filterable":false},"tagName":"div","displayLayout":{"type":"flex","columns":4,"shrinkColumns":false},"dimensions":{"widthType":"fill"},"queryContextIncludes":["collection"],"align":"wide","className":"ws-product-grid is-style-index-card"} -->
+	<div class="wp-block-woocommerce-product-collection alignwide ws-product-grid is-style-index-card">
 		<!-- wp:woocommerce/product-template -->
 			<!-- wp:woocommerce/product-image {"imageSizing":"thumbnail","isDescendentOfQueryLoop":true} /-->
 			<!-- wp:woocommerce/product-sale-badge {"isDescendentOfQueryLoop":true} /-->
