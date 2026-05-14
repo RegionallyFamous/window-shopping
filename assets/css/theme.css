@@ -902,7 +902,9 @@ html {
 .ws-product-dossier__grid {
   align-items: stretch !important;
   width: 100%;
-  max-width: none;
+  max-width: min(100%, var(--wp--custom--window--dossier-max-width, 96rem));
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .ws-product-dossier__grid > .wp-block-column {
@@ -1015,23 +1017,25 @@ html {
 .wp-block-woocommerce-product-details.is-style-field-notebook {
   overflow: hidden;
   padding: 0;
+  background: var(--wp--custom--window--product-details-background, var(--wp--custom--window--product-card-background, var(--ws-surface)));
+  color: var(--wp--custom--window--product-details-text-color, var(--ws-surface-text));
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.woocommerce-tabs.wc-tabs-wrapper) {
   display: grid;
-  grid-template-columns: minmax(13rem, 0.24fr) minmax(0, 0.76fr);
-  min-height: var(--wp--custom--window--product-dossier-min-height, 24rem);
+  grid-template-columns: minmax(13.5rem, 16rem) minmax(0, 1fr);
+  align-items: stretch;
+  min-height: 0;
+  color: var(--wp--custom--window--product-details-text-color, var(--ws-surface-text));
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.tabs.wc-tabs) {
   display: grid;
   align-content: start;
-  gap: 0.55rem;
-  padding: var(--wp--preset--spacing--40);
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  padding: clamp(1rem, 2vw, 1.35rem);
   border-right: var(--wp--custom--border-weight) solid var(--ws-surface-line);
-  background:
-    linear-gradient(var(--ws-surface-line) 1px, transparent 1px) 0 0 / 100% 3.2rem,
-    color-mix(in srgb, var(--wp--preset--color--surface) 86%, var(--wp--preset--color--base));
+  background: color-mix(in srgb, var(--wp--preset--color--surface) 86%, var(--wp--preset--color--base));
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.tabs.wc-tabs a) {
@@ -1039,8 +1043,8 @@ html {
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
-  min-height: 3rem;
-  padding: 0.75rem 0.9rem;
+  min-height: clamp(3rem, 4vw, 3.5rem);
+  padding: 0.78rem 0.9rem;
   border: var(--wp--custom--border-weight) solid var(--ws-surface-line);
   border-radius: calc(var(--wp--custom--radius) * 0.75);
   background: var(--ws-control-background);
@@ -1048,9 +1052,30 @@ html {
   font-family: var(--wp--preset--font-family--mono);
   font-size: var(--wp--preset--font-size--small);
   font-weight: 760;
-  line-height: 1;
+  line-height: 1.08;
   text-transform: uppercase;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs.wc-tabs-wrapper {
+  display: grid !important;
+  grid-template-columns: minmax(13.5rem, 16rem) minmax(0, 1fr) !important;
+  align-items: stretch;
+  min-height: 0 !important;
+  color: var(--wp--custom--window--product-details-text-color, var(--ws-surface-text));
+}
+
+.wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs ul.tabs.wc-tabs {
+  display: grid !important;
+  align-content: start;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  align-self: stretch;
+  box-sizing: border-box;
+  margin: 0 !important;
+  padding: clamp(1rem, 2vw, 1.35rem) !important;
+  border-right: var(--wp--custom--border-weight) solid var(--ws-surface-line) !important;
+  background: color-mix(in srgb, var(--wp--preset--color--surface) 86%, var(--wp--preset--color--base));
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs .tabs.wc-tabs li {
@@ -1073,28 +1098,38 @@ html {
 
 .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs .tabs.wc-tabs a {
   display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   width: 100%;
+  min-height: clamp(3rem, 4vw, 3.5rem);
   box-sizing: border-box;
+  padding: 0.78rem 0.9rem;
   border-color: var(--ws-surface-line) !important;
   background: var(--ws-control-background) !important;
   color: var(--ws-control-text) !important;
+  line-height: 1.08;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.tabs.wc-tabs a)::after {
   content: "+";
+  flex: 0 0 auto;
+  margin-left: auto;
   font-weight: 500;
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.tabs.wc-tabs li.active a) {
   border-color: var(--wp--preset--color--accent);
   background: var(--wp--preset--color--accent);
-  color: var(--wp--preset--color--base);
+  color: var(--wp--custom--window--product-details-active-text-color, var(--wp--preset--color--base));
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs .tabs.wc-tabs li.active a {
   border-color: var(--wp--preset--color--accent) !important;
   background: var(--wp--preset--color--accent) !important;
-  color: var(--wp--preset--color--base) !important;
+  color: var(--wp--custom--window--product-details-active-text-color, var(--wp--preset--color--base)) !important;
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.tabs.wc-tabs li.active a)::after {
@@ -1105,18 +1140,25 @@ html {
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.woocommerce-Tabs-panel) {
   min-width: 0;
-  padding: clamp(2rem, 5vw, 4.5rem);
+  padding: clamp(1.6rem, 3.2vw, 3.25rem);
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-Tabs-panel {
   box-sizing: border-box;
-  padding: clamp(2rem, 5vw, 4.5rem) !important;
+  padding: clamp(1.6rem, 3.2vw, 3.25rem) !important;
+  color: var(--wp--custom--window--product-details-text-color, var(--ws-surface-text));
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.woocommerce-Tabs-panel > h2:first-child) {
-  font-size: var(--wp--preset--font-size--x-large);
-  padding-bottom: var(--wp--preset--spacing--30);
+  color: inherit;
+  font-size: clamp(1.8rem, 3.2vw, var(--wp--preset--font-size--x-large));
+  line-height: 1.05;
+  padding-bottom: clamp(0.75rem, 1.5vw, var(--wp--preset--spacing--30));
   border-bottom: var(--wp--custom--border-weight) solid var(--ws-surface-line);
+}
+
+.wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-Tabs-panel > h2:first-child {
+  color: inherit !important;
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook :where(.woocommerce-Tabs-panel p) {
@@ -1126,6 +1168,7 @@ html {
 }
 
 .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-Tabs-panel p {
+  color: inherit !important;
   font-size: var(--wp--preset--font-size--medium) !important;
   font-weight: 480 !important;
   line-height: 1.58;
@@ -1156,6 +1199,25 @@ html {
   margin-top: var(--wp--preset--spacing--50);
   padding-top: var(--wp--preset--spacing--40);
   border-top: var(--wp--custom--border-weight) solid var(--ws-surface-line);
+}
+
+@media (max-width: 1080px) {
+  .ws-product-dossier__grid {
+    flex-wrap: wrap !important;
+  }
+
+  .ws-product-dossier__grid > .wp-block-column {
+    flex-basis: 100% !important;
+  }
+
+  .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs.wc-tabs-wrapper {
+    grid-template-columns: 1fr !important;
+  }
+
+  .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs ul.tabs.wc-tabs {
+    border-right: 0 !important;
+    border-bottom: var(--wp--custom--border-weight) solid var(--ws-surface-line) !important;
+  }
 }
 
 .wp-block-woocommerce-product-gallery.is-style-mosaic-gallery,
@@ -2208,12 +2270,25 @@ select.orderby,
     min-height: 0;
   }
 
+  .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs.wc-tabs-wrapper {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+  }
+
   .wp-block-woocommerce-product-details.is-style-field-notebook :where(.tabs.wc-tabs) {
     grid-template-columns: 1fr;
     padding: var(--wp--preset--spacing--30);
     border-right: 0;
     border-bottom: var(--wp--custom--border-weight) solid var(--ws-surface-line);
-    background-size: 100% 2.9rem;
+    background: color-mix(in srgb, var(--wp--preset--color--surface) 86%, var(--wp--preset--color--base));
+  }
+
+  .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs ul.tabs.wc-tabs {
+    grid-template-columns: 1fr;
+    padding: var(--wp--preset--spacing--30) !important;
+    border-right: 0 !important;
+    border-bottom: var(--wp--custom--border-weight) solid var(--ws-surface-line) !important;
+    background: color-mix(in srgb, var(--wp--preset--color--surface) 86%, var(--wp--preset--color--base));
   }
 
   .wp-block-woocommerce-product-details.is-style-field-notebook :where(.tabs.wc-tabs a) {
@@ -2222,8 +2297,18 @@ select.orderby,
     padding-left: 0.75rem;
   }
 
+  .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-tabs .tabs.wc-tabs a {
+    min-height: 2.75rem;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
   .wp-block-woocommerce-product-details.is-style-field-notebook :where(.woocommerce-Tabs-panel) {
     padding: var(--wp--preset--spacing--40);
+  }
+
+  .wp-block-woocommerce-product-details.is-style-field-notebook .woocommerce-Tabs-panel {
+    padding: var(--wp--preset--spacing--40) !important;
   }
 
   .wp-block-woocommerce-product-details.is-style-field-notebook :where(.woocommerce-Tabs-panel p) {

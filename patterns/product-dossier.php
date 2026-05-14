@@ -8,7 +8,7 @@
  * @package Window_Shopping
  */
 ?>
-<!-- wp:group {"align":"full","className":"ws-product-dossier ws-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"clamp(1rem, 4vw, var(--wp--preset--spacing--60))","bottom":"var:preset|spacing|50","left":"clamp(1rem, 4vw, var(--wp--preset--spacing--60))"}},"border":{"top":{"color":"var:preset|color|muted","width":"1px"}}},"layout":{"type":"default"}} -->
+<!-- wp:group {"align":"full","className":"ws-product-dossier ws-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"clamp(1rem, 4vw, var(--wp--preset--spacing--60))","bottom":"var:preset|spacing|50","left":"clamp(1rem, 4vw, var(--wp--preset--spacing--60))"}},"border":{"top":{"color":"var:preset|color|muted","width":"1px"}}},"layout":{"type":"constrained","contentSize":"96rem"}} -->
 <div class="wp-block-group alignfull ws-product-dossier ws-section" style="border-top-color:var(--wp--preset--color--muted);border-top-width:1px;padding-top:var(--wp--preset--spacing--50);padding-right:clamp(1rem, 4vw, var(--wp--preset--spacing--60));padding-bottom:var(--wp--preset--spacing--50);padding-left:clamp(1rem, 4vw, var(--wp--preset--spacing--60))">
 	<!-- wp:columns {"className":"ws-product-dossier__grid","style":{"spacing":{"blockGap":{"left":"var:preset|spacing|40"}}}} -->
 	<div class="wp-block-columns ws-product-dossier__grid">
