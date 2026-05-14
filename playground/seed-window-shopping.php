@@ -555,8 +555,8 @@ $products = array(
 	array( 'sku' => 'WS-RIBBON-SHIRT', 'name' => 'Ribbon Hem Shirt', 'price' => '126', 'image' => 'ribbon-hem-shirt.jpg', 'cats' => array( 'atelier', 'studio' ), 'rating' => 5, 'short' => 'A relaxed woven shirt with a quiet ribbon detail and an easy drape.' ),
 	array( 'sku' => 'WS-CAMP-JACKET', 'name' => 'Camp Ledger Jacket', 'price' => '188', 'image' => 'camp-ledger-jacket.jpg', 'cats' => array( 'field', 'atelier' ), 'rating' => 5, 'short' => 'A hard-wearing utility jacket with notebook pockets and a dry hand feel.' ),
 	array( 'sku' => 'WS-TRAIL-TIN', 'name' => 'Trail Tin Kit', 'price' => '58', 'image' => 'trail-tin-kit.jpg', 'cats' => array( 'field', 'oddities' ), 'rating' => 4, 'short' => 'A compact field kit for tidy repairs, tiny tools, and useful odds.' ),
-	array( 'sku' => 'WS-CABLE-PACK', 'name' => 'Cable Index Pack', 'price' => '28', 'image' => 'cable-index-pack.jpg', 'cats' => array( 'signal', 'studio' ), 'rating' => 4, 'short' => 'Color-coded cable keepers for the drawer that always fights back.' ),
-	array( 'sku' => 'WS-DESK-DOCK', 'name' => 'Desk Beacon Dock', 'price' => '96', 'image' => 'desk-beacon-dock.jpg', 'cats' => array( 'signal', 'studio' ), 'rating' => 5, 'short' => 'A compact dock with a small signal light and a calm desk footprint.' ),
+	array( 'sku' => 'WS-CABLE-PACK', 'name' => 'Cable Index Pack', 'price' => '28', 'image' => 'cable-index-pack.jpg', 'cats' => array( 'signal', 'field' ), 'rating' => 4, 'short' => 'Color-coded cable keepers for drawers, go-bags, and tidy field repairs.' ),
+	array( 'sku' => 'WS-DESK-DOCK', 'name' => 'Desk Beacon Dock', 'price' => '96', 'image' => 'desk-beacon-dock.jpg', 'cats' => array( 'studio' ), 'rating' => 5, 'short' => 'A compact dock with a small signal light and a calm desk footprint.' ),
 	array( 'sku' => 'WS-SIGNAL-DOCK', 'name' => 'Signal Charging Dock', 'price' => '96', 'image' => 'signal-charging-dock.jpg', 'cats' => array( 'signal' ), 'rating' => 5, 'short' => 'A clean charging stand for modern accessories and nightly resets.' ),
 	array( 'sku' => 'WS-SIGNAL-POUCH', 'name' => 'Signal Tech Pouch', 'price' => '72', 'image' => 'signal-tech-pouch.jpg', 'cats' => array( 'signal' ), 'rating' => 4, 'short' => 'A slim pouch with divided storage for cables, drives, and adapters.' ),
 	array( 'sku' => 'WS-SIGNAL-HUB', 'name' => 'Signal USB-C Hub', 'price' => '84', 'image' => 'signal-usb-c-hub.jpg', 'cats' => array( 'signal' ), 'rating' => 5, 'short' => 'A low-profile hub with ports where your hands expect them.' ),
@@ -565,7 +565,7 @@ $products = array(
 	array( 'sku' => 'WS-OIL-DUO', 'name' => 'Countertop Oil Duo', 'price' => '36', 'image' => 'countertop-oil-duo.jpg', 'cats' => array( 'pantry' ), 'rating' => 4, 'short' => 'Two finishing oils with a tidy pour and a warm kitchen presence.' ),
 	array( 'sku' => 'WS-CITRUS-CRATE', 'name' => 'Market Citrus Crate', 'price' => '32', 'image' => 'market-citrus-crate.jpg', 'cats' => array( 'pantry' ), 'rating' => 5, 'short' => 'A small crate of bright citrus for displays, gifting, and garnish duty.' ),
 	array( 'sku' => 'WS-SUNDAY-JAM', 'name' => 'Sunday Jam Set', 'price' => '30', 'image' => 'sunday-jam-set.jpg', 'cats' => array( 'pantry' ), 'rating' => 5, 'short' => 'A trio of jams made for breakfast tables and small thank-you gifts.' ),
-	array( 'sku' => 'WS-POCKET-THUNDER', 'name' => 'Pocket Thunder', 'price' => '18', 'image' => 'pocket-thunder.jpg', 'cats' => array( 'oddities', 'field' ), 'rating' => 5, 'short' => 'A tiny strange object with an unreasonable amount of personality.' ),
+	array( 'sku' => 'WS-POCKET-THUNDER', 'name' => 'Pocket Thunder', 'price' => '18', 'image' => 'pocket-thunder.jpg', 'cats' => array( 'oddities' ), 'rating' => 5, 'short' => 'A tiny strange object with an unreasonable amount of personality.' ),
 );
 
 window_shopping_playground_cleanup_sample_images(

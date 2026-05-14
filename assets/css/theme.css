@@ -1777,6 +1777,11 @@ select.orderby option,
   font-weight: 500;
 }
 
+.wc-block-mini-cart__drawer :where(.wc-block-cart-item__product, .wc-block-cart-item__quantity) {
+  min-width: 0;
+  max-width: 100%;
+}
+
 .wc-block-mini-cart__drawer .wc-block-components-product-name {
   font-family: var(--wp--preset--font-family--heading);
   font-size: var(--wp--preset--font-size--small);
@@ -1801,15 +1806,50 @@ select.orderby option,
 }
 
 .wc-block-mini-cart__drawer :where(.wc-block-components-quantity-selector) {
-  min-height: 2.75rem;
-  border-color: var(--ws-surface-line) !important;
+  display: inline-grid !important;
+  grid-template-columns: repeat(3, minmax(var(--wp--custom--window--mini-cart-control-size, 2.75rem), 1fr));
+  align-items: stretch;
+  box-sizing: border-box;
+  inline-size: min(100%, var(--wp--custom--window--mini-cart-stepper-width, 8.75rem));
+  min-height: var(--wp--custom--window--mini-cart-control-size, 2.75rem);
+  overflow: hidden;
+  border: var(--wp--custom--border-weight) solid var(--ws-surface-line) !important;
   border-radius: calc(var(--ws-mini-cart-button-radius) * 0.75) !important;
+  background: var(--ws-control-background);
 }
 
 .wc-block-mini-cart__drawer :where(.wc-block-components-quantity-selector__button, .wc-block-components-quantity-selector__input) {
-  min-width: 2.75rem !important;
-  min-height: 2.75rem !important;
-  font-size: var(--wp--preset--font-size--small) !important;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  inline-size: 100% !important;
+  min-width: var(--wp--custom--window--mini-cart-control-size, 2.75rem) !important;
+  min-height: var(--wp--custom--window--mini-cart-control-size, 2.75rem) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--ws-surface-text) !important;
+  font-family: var(--wp--preset--font-family--mono);
+  font-size: var(--wp--preset--font-size--medium) !important;
+  font-weight: 760;
+  line-height: 1;
+  text-align: center;
+}
+
+.wc-block-mini-cart__drawer .wc-block-components-quantity-selector > * + * {
+  border-left: var(--wp--custom--border-weight) solid var(--ws-surface-line) !important;
+}
+
+.wc-block-mini-cart__drawer :where(.wc-block-components-quantity-selector__button) {
+  cursor: pointer;
+  background: color-mix(in srgb, var(--ws-surface-text) 5%, transparent) !important;
+}
+
+.wc-block-mini-cart__drawer :where(.wc-block-components-quantity-selector__button:hover) {
+  background: color-mix(in srgb, var(--ws-surface-text) 10%, transparent) !important;
 }
 
 .wc-block-mini-cart__drawer :where(.wc-block-cart-item__remove-link, .wc-block-components-product-details__remove, button[aria-label*="Remove"], button[aria-label*="remove"], .components-modal__header .components-button, .wc-block-components-drawer__close) {
@@ -1871,11 +1911,27 @@ select.orderby option,
 .ws-checkout-reassurance__item {
   display: flex;
   align-items: center;
+  gap: var(--wp--custom--window--reassurance-item-gap, 0.7rem);
   min-height: var(--wp--custom--window--reassurance-item-min-height, 4.5rem);
   padding: var(--wp--custom--window--reassurance-item-padding-y, 0.82rem) var(--wp--custom--window--reassurance-item-padding-x, 1rem) !important;
   border: var(--wp--custom--window--reassurance-item-border, 1px solid var(--ws-surface-line));
   border-radius: var(--wp--custom--window--reassurance-item-radius, var(--ws-checkout-control-radius));
   background: var(--wp--custom--window--reassurance-item-background, color-mix(in srgb, var(--wp--preset--color--surface) 72%, transparent));
+  color: var(--wp--custom--window--reassurance-copy-color, var(--ws-surface-text));
+}
+
+.ws-checkout-reassurance__item .ws-kicker {
+  flex: 0 0 auto;
+  color: var(--wp--custom--window--reassurance-label-color, var(--wp--custom--window--surface-kicker-color, var(--ws-surface-link))) !important;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.ws-checkout-reassurance__item > :not(.ws-kicker) {
+  min-width: 0;
+  color: var(--wp--custom--window--reassurance-copy-color, currentColor);
+  font-weight: var(--wp--custom--window--reassurance-copy-font-weight, inherit);
+  line-height: 1.25;
 }
 
 .ws-checkout-reassurance__item > * {

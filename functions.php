@@ -159,6 +159,65 @@ function window_shopping_woocommerce_thumbnail_image_size() {
 add_filter( 'woocommerce_get_image_size_thumbnail', 'window_shopping_woocommerce_thumbnail_image_size' );
 
 /**
+ * Whether the current request is rendering the front-page merchandising surface.
+ *
+ * The home page opens with a product-heavy hero shelf, so those product photos
+ * need to be available immediately instead of waiting on lazy-loading heuristics.
+ *
+ * @return bool
+ */
+function window_shopping_is_home_merchandising_image_context() {
+	if ( is_admin() ) {
+		return false;
+	}
+
+	return is_front_page() || is_home();
+}
+
+/**
+ * Load front-page Woo Product Image block photos eagerly.
+ *
+ * @param string $loading_attr The loading attribute chosen by WooCommerce.
+ * @param int    $image_id     Target attachment ID.
+ * @return string
+ */
+function window_shopping_home_product_image_loading_attr( $loading_attr, $image_id ) {
+	if ( window_shopping_is_home_merchandising_image_context() ) {
+		return 'eager';
+	}
+
+	return $loading_attr;
+}
+add_filter( 'woocommerce_product_image_loading_attr', 'window_shopping_home_product_image_loading_attr', 10, 2 );
+
+/**
+ * Keep WooCommerce thumbnail output consistent with the eager home shelf images.
+ *
+ * @param array<string, string> $attr       Attachment image attributes.
+ * @param WP_Post              $attachment Attachment post object.
+ * @param string|int[]         $size       Requested image size.
+ * @return array<string, string>
+ */
+function window_shopping_home_woocommerce_thumbnail_attributes( $attr, $attachment, $size ) {
+	if ( ! window_shopping_is_home_merchandising_image_context() || empty( $attr['class'] ) ) {
+		return $attr;
+	}
+
+	if ( false === strpos( (string) $attr['class'], 'woocommerce_thumbnail' ) ) {
+		return $attr;
+	}
+
+	$attr['loading'] = 'eager';
+
+	if ( ! empty( $attr['sizes'] ) ) {
+		$attr['sizes'] = preg_replace( '/^auto,\s*/', '', (string) $attr['sizes'] );
+	}
+
+	return $attr;
+}
+add_filter( 'wp_get_attachment_image_attributes', 'window_shopping_home_woocommerce_thumbnail_attributes', 10, 3 );
+
+/**
  * Enqueue the small CSS layer used for WooCommerce runtime polish.
  *
  * @return void
@@ -392,7 +451,7 @@ function window_shopping_render_hero_product_shelf( $slug = 'studio' ) {
 	echo '<!-- wp:woocommerce/product-collection ' . wp_json_encode( $attrs ) . ' -->';
 	echo '<div class="wp-block-woocommerce-product-collection alignwide ws-product-grid ws-hero-shelf ws-hero-shelf--columns-' . esc_attr( $config['columns'] ) . ' is-style-index-card">';
 	echo '<!-- wp:woocommerce/product-template -->';
-	echo '<!-- wp:woocommerce/product-image {"imageSizing":"thumbnail","isDescendentOfQueryLoop":true} /-->';
+	echo '<!-- wp:woocommerce/product-image {"showProductLink":true,"imageSizing":"thumbnail","isDescendentOfQueryLoop":true,"scale":"cover","aspectRatio":"1/1"} /-->';
 	echo '<!-- wp:post-title {"level":3,"isLink":true,"style":{"typography":{"lineHeight":"var(--wp--custom--window--showcase-title-line-height,1.2)"},"spacing":{"margin":{"top":"var(--wp--custom--window--showcase-title-margin-top,0.85rem)","bottom":"var(--wp--custom--window--showcase-title-margin-bottom,0.35rem)"}}},"fontSize":"medium","__woocommerceNamespace":"woocommerce/product-collection/product-title"} /-->';
 	echo '<!-- wp:woocommerce/product-price {"isDescendentOfQueryLoop":true,"fontSize":"small"} /-->';
 	echo '<!-- wp:woocommerce/product-button {"isDescendentOfQueryLoop":true,"textAlign":"left","fontSize":"small","style":{"spacing":{"margin":{"top":"var(--wp--custom--window--showcase-button-margin-top,0.85rem)"}}}} /-->';
