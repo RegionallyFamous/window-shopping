@@ -40,8 +40,13 @@
 		<p>Enough detail to choose quickly, without turning shopping into homework.</p>
 		<!-- /wp:paragraph --><cite>Happy browser</cite></blockquote>
 		<!-- /wp:quote -->
+
+		<!-- wp:quote {"className":"ws-proof-card ws-surface","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","right":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40"}},"border":{"color":"var:preset|color|muted","width":"1px","radius":"var(--wp--custom--radius)","left":{"color":"var:preset|color|accent","width":"3px"}},"shadow":"var:preset|shadow|crisp"},"backgroundColor":"surface"} -->
+		<blockquote class="wp-block-quote ws-proof-card ws-surface has-surface-background-color has-background" style="border-color:var(--wp--preset--color--muted);border-width:1px;border-radius:var(--wp--custom--radius);box-shadow:var(--wp--preset--shadow--crisp);border-left-color:var(--wp--preset--color--accent);border-left-width:3px;padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)"><!-- wp:paragraph -->
+		<p>I found what I needed, understood the shipping, and never had to wonder what came next.</p>
+		<!-- /wp:paragraph --><cite>Careful buyer</cite></blockquote>
+		<!-- /wp:quote -->
 	</div>
 	<!-- /wp:group -->
 </div>
 <!-- /wp:group -->
-
