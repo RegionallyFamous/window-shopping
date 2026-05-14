@@ -189,7 +189,7 @@ async function openCdpPage(port) {
           pending.delete(message.id);
           reject(new Error(`CDP timeout: ${method}`));
         }
-      }, 30000);
+      }, 60000);
     });
   }
 

@@ -330,6 +330,79 @@ function window_shopping_hero_variants() {
 }
 
 /**
+ * Render a style-aware storefront hero product shelf.
+ *
+ * @param string $slug Style variation slug.
+ * @return void
+ */
+function window_shopping_render_hero_product_shelf( $slug = 'studio' ) {
+	$shelves = array(
+		'studio'       => array( 'category' => 'studio', 'per_page' => 4, 'columns' => 4, 'products' => array( 'velvet-utility-tote', 'desk-beacon-dock', 'bottled-morning', 'cable-index-pack' ) ),
+		'oddities'    => array( 'category' => 'oddities', 'per_page' => 3, 'columns' => 3, 'products' => array( 'moonlit-receipt-box', 'pocket-thunder', 'trail-tin-kit' ) ),
+		'atelier'     => array( 'category' => 'atelier', 'per_page' => 3, 'columns' => 3, 'products' => array( 'ribbon-hem-shirt', 'velvet-utility-tote', 'camp-ledger-jacket' ) ),
+		'field-supply' => array( 'category' => 'field-supply', 'per_page' => 3, 'columns' => 3, 'products' => array( 'camp-ledger-jacket', 'trail-tin-kit', 'cable-index-pack' ) ),
+		'pantry'      => array( 'category' => 'pantry', 'per_page' => 4, 'columns' => 4, 'products' => array( 'bottled-morning', 'countertop-oil-duo', 'market-citrus-crate', 'sunday-jam-set' ) ),
+		'signal'      => array( 'category' => 'signal', 'per_page' => 3, 'columns' => 3, 'products' => array( 'signal-wireless-headphones', 'signal-usb-c-hub', 'signal-tech-pouch' ) ),
+	);
+	$config  = isset( $shelves[ $slug ] ) ? $shelves[ $slug ] : $shelves['studio'];
+	$term    = get_term_by( 'slug', $config['category'], 'product_cat' );
+	$product_ids = array();
+	foreach ( $config['products'] as $product_slug ) {
+		$product = get_page_by_path( $product_slug, OBJECT, 'product' );
+		if ( $product ) {
+			$product_ids[] = (int) $product->ID;
+		}
+	}
+	$query   = array(
+		'perPage'                    => $config['per_page'],
+		'pages'                      => 0,
+		'offset'                     => 0,
+		'postType'                   => 'product',
+		'order'                      => 'asc',
+		'orderBy'                    => $product_ids ? 'post__in' : 'title',
+		'author'                     => '',
+		'search'                     => '',
+		'exclude'                    => array(),
+		'sticky'                     => '',
+		'inherit'                    => false,
+		'taxQuery'                   => $product_ids ? array() : ( $term ? array( 'product_cat' => array( (int) $term->term_id ) ) : array() ),
+		'isProductCollectionBlock'   => true,
+		'featured'                   => false,
+		'woocommerceOnSale'          => false,
+		'woocommerceStockStatus'     => array( 'instock', 'outofstock', 'onbackorder' ),
+		'woocommerceAttributes'      => array(),
+		'woocommerceHandPickedProducts' => $product_ids,
+		'filterable'                 => false,
+	);
+	$attrs   = array(
+		'queryId'              => 110 + array_search( $slug, array_keys( $shelves ), true ),
+		'query'                => $query,
+		'tagName'              => 'div',
+		'displayLayout'        => array(
+			'type'          => 'flex',
+			'columns'       => $config['columns'],
+			'shrinkColumns' => false,
+		),
+		'dimensions'           => array( 'widthType' => 'fill' ),
+		'queryContextIncludes' => array( 'collection' ),
+		'align'                => 'wide',
+		'className'            => 'ws-product-grid ws-hero-shelf ws-hero-shelf--columns-' . $config['columns'] . ' is-style-index-card',
+	);
+
+	echo '<!-- wp:woocommerce/product-collection ' . wp_json_encode( $attrs ) . ' -->';
+	echo '<div class="wp-block-woocommerce-product-collection alignwide ws-product-grid ws-hero-shelf ws-hero-shelf--columns-' . esc_attr( $config['columns'] ) . ' is-style-index-card">';
+	echo '<!-- wp:woocommerce/product-template -->';
+	echo '<!-- wp:woocommerce/product-image {"imageSizing":"thumbnail","isDescendentOfQueryLoop":true} /-->';
+	echo '<!-- wp:post-title {"level":3,"isLink":true,"style":{"typography":{"lineHeight":"var(--wp--custom--window--showcase-title-line-height,1.2)"},"spacing":{"margin":{"top":"var(--wp--custom--window--showcase-title-margin-top,0.85rem)","bottom":"var(--wp--custom--window--showcase-title-margin-bottom,0.35rem)"}}},"fontSize":"medium","__woocommerceNamespace":"woocommerce/product-collection/product-title"} /-->';
+	echo '<!-- wp:woocommerce/product-price {"isDescendentOfQueryLoop":true,"fontSize":"small"} /-->';
+	echo '<!-- wp:woocommerce/product-button {"isDescendentOfQueryLoop":true,"textAlign":"left","fontSize":"small","style":{"spacing":{"margin":{"top":"var(--wp--custom--window--showcase-button-margin-top,0.85rem)"}}}} /-->';
+	echo '<!-- /wp:woocommerce/product-template -->';
+	echo '<!-- wp:woocommerce/product-collection-no-results --><div class="wp-block-woocommerce-product-collection-no-results"><!-- wp:paragraph --><p>Add a few products to see this shelf come alive.</p><!-- /wp:paragraph --></div><!-- /wp:woocommerce/product-collection-no-results -->';
+	echo '</div>';
+	echo '<!-- /wp:woocommerce/product-collection -->';
+}
+
+/**
  * Render one storefront hero variant.
  *
  * @param string $slug Style variation slug.
@@ -408,7 +481,7 @@ function window_shopping_render_hero_pattern( $slug = 'studio' ) {
 	echo '<!-- /wp:paragraph -->';
 	echo '</div>';
 	echo '<!-- /wp:group -->';
-	echo '<!-- wp:pattern {"slug":"window-shopping/product-shelf"} /-->';
+	window_shopping_render_hero_product_shelf( $slug );
 	echo '</div>';
 	echo '<!-- /wp:group -->';
 	echo '</div>';
