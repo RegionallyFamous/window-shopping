@@ -3,7 +3,7 @@
  * Title: Checkout reassurance
  * Slug: window-shopping/checkout-reassurance
  * Categories: window-shopping-checkout
- * Description: A compact checkout reassurance strip.
+ * Description: Checkout reassurance cards for the cart and checkout flow.
  *
  * @package Window_Shopping
  */
@@ -16,8 +16,8 @@
 		<p class="ws-kicker has-accent-color has-text-color has-mono-font-family has-small-font-size" style="font-weight:760;letter-spacing:0;text-transform:uppercase">Secure payment</p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:paragraph {"fontSize":"small"} -->
-		<p class="has-small-font-size">Encrypted checkout</p>
+		<!-- wp:paragraph {"fontSize":"medium"} -->
+		<p class="has-medium-font-size">Encrypted checkout</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -28,8 +28,8 @@
 		<p class="ws-kicker has-accent-color has-text-color has-mono-font-family has-small-font-size" style="font-weight:760;letter-spacing:0;text-transform:uppercase">Order updates</p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:paragraph {"fontSize":"small"} -->
-		<p class="has-small-font-size">Email receipts and status notes</p>
+		<!-- wp:paragraph {"fontSize":"medium"} -->
+		<p class="has-medium-font-size">Receipts and status notes</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->
@@ -40,8 +40,20 @@
 		<p class="ws-kicker has-accent-color has-text-color has-mono-font-family has-small-font-size" style="font-weight:760;letter-spacing:0;text-transform:uppercase">Protected cart</p>
 		<!-- /wp:paragraph -->
 
-		<!-- wp:paragraph {"fontSize":"small"} -->
-		<p class="has-small-font-size">Clear totals before checkout</p>
+		<!-- wp:paragraph {"fontSize":"medium"} -->
+		<p class="has-medium-font-size">Totals before checkout</p>
+		<!-- /wp:paragraph -->
+	</div>
+	<!-- /wp:group -->
+
+	<!-- wp:group {"className":"ws-checkout-reassurance__item","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group ws-checkout-reassurance__item">
+		<!-- wp:paragraph {"className":"ws-kicker","style":{"typography":{"fontWeight":"760","letterSpacing":"0","textTransform":"uppercase"}},"textColor":"accent","fontFamily":"mono","fontSize":"small"} -->
+		<p class="ws-kicker has-accent-color has-text-color has-mono-font-family has-small-font-size" style="font-weight:760;letter-spacing:0;text-transform:uppercase">Support</p>
+		<!-- /wp:paragraph -->
+
+		<!-- wp:paragraph {"fontSize":"medium"} -->
+		<p class="has-medium-font-size">Help after the order</p>
 		<!-- /wp:paragraph -->
 	</div>
 	<!-- /wp:group -->

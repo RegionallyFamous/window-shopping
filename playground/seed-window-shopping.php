@@ -568,6 +568,25 @@ $products = array(
 	array( 'sku' => 'WS-POCKET-THUNDER', 'name' => 'Pocket Thunder', 'price' => '18', 'image' => 'pocket-thunder.jpg', 'cats' => array( 'oddities' ), 'rating' => 5, 'short' => 'A tiny strange object with an unreasonable amount of personality.' ),
 );
 
+$desired_product_skus = wp_list_pluck( $products, 'sku' );
+$existing_product_ids = get_posts(
+	array(
+		'post_type'      => 'product',
+		'post_status'    => 'any',
+		'posts_per_page' => -1,
+		'fields'         => 'ids',
+	)
+);
+
+foreach ( $existing_product_ids as $existing_product_id ) {
+	$existing_product = wc_get_product( $existing_product_id );
+	$existing_sku     = $existing_product instanceof WC_Product ? $existing_product->get_sku() : '';
+
+	if ( ! in_array( $existing_sku, $desired_product_skus, true ) ) {
+		wp_delete_post( $existing_product_id, true );
+	}
+}
+
 window_shopping_playground_cleanup_sample_images(
 	array_merge(
 		wp_list_pluck( $products, 'image' ),
@@ -600,6 +619,9 @@ foreach ( $products as $item ) {
 	$product->set_price( $item['price'] );
 	$product->set_short_description( $item['short'] );
 	$product->set_description( $item['short'] . ' Built for the Window Shopping demo catalog.' );
+	$product->set_manage_stock( false );
+	$product->set_stock_quantity( null );
+	$product->set_backorders( 'no' );
 	$product->set_stock_status( 'instock' );
 	$product->set_reviews_allowed( true );
 

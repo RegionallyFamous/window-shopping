@@ -232,9 +232,8 @@ function window_shopping_switcher_enqueue_style() {
 		'window-shopping-style-switcher',
 		'
 			.window-shopping-style-switcher {
-				position: sticky;
-				top: 0;
-				z-index: 60;
+				position: relative;
+				z-index: 40;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -281,20 +280,20 @@ function window_shopping_switcher_enqueue_style() {
 			color: #11100e;
 			}
 			.window-shopping-has-style-switcher .ws-site-header {
-				top: 34px;
+				top: 0;
 			}
 			.admin-bar .window-shopping-style-switcher {
-				top: 32px;
+				top: auto;
 			}
 			.admin-bar.window-shopping-has-style-switcher .ws-site-header {
-				top: 66px;
+				top: 0;
 			}
 		@media (max-width: 782px) {
 			.admin-bar .window-shopping-style-switcher {
-				top: 46px;
+				top: auto;
 				}
 				.admin-bar.window-shopping-has-style-switcher .ws-site-header {
-					top: 80px;
+					top: 0;
 				}
 			}
 			@media (max-width: 640px) {

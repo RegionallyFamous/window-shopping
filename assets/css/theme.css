@@ -126,6 +126,14 @@ html {
 .ws-site-header .wp-block-navigation__responsive-container-close {
   min-width: var(--wp--custom--window--header-action-size, 44px);
   min-height: var(--wp--custom--window--header-action-size, 44px);
+  color: var(--wp--custom--window--header-action-color, var(--wp--custom--window--header-link-color, currentColor));
+}
+
+.ws-site-header .wp-block-navigation__responsive-container-open svg,
+.ws-site-header .wp-block-navigation__responsive-container-close svg {
+  color: currentColor;
+  fill: currentColor;
+  stroke: currentColor;
 }
 
 .ws-site-actions {
@@ -1762,6 +1770,22 @@ select.orderby option,
   color: var(--ws-surface-text) !important;
 }
 
+/* Woo's drawer runtime lets the item list absorb the empty vertical space; keep the filled drawer grouped near the top. */
+.wc-block-mini-cart__drawer .wp-block-woocommerce-filled-mini-cart-contents-block {
+  justify-content: flex-start !important;
+}
+
+.wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-items-block {
+  flex: 0 1 auto !important;
+  min-height: 0 !important;
+  max-block-size: min(45vh, 24rem);
+  overflow: auto;
+}
+
+.wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-footer-block {
+  margin-top: var(--wp--preset--spacing--40) !important;
+}
+
 .wc-block-mini-cart__drawer .components-modal__header,
 .wc-block-mini-cart__drawer .wc-block-mini-cart__title,
 .wc-block-mini-cart__drawer .wp-block-woocommerce-mini-cart-title-block {
@@ -1801,8 +1825,12 @@ select.orderby option,
   object-fit: cover;
 }
 
-.wc-block-mini-cart__drawer :where(.wc-block-components-product-price, .wc-block-components-product-price *, .wc-block-components-totals-item, .wc-block-components-totals-item *, .wc-block-components-quantity-selector, .wc-block-components-quantity-selector *) {
+.wc-block-mini-cart__drawer :where(.wc-block-components-product-price, .wc-block-components-product-price *, .wc-block-components-totals-item, .wc-block-components-totals-item *) {
   color: var(--ws-surface-text) !important;
+}
+
+.wc-block-mini-cart__drawer :where(.wc-block-components-quantity-selector, .wc-block-components-quantity-selector *) {
+  color: var(--ws-control-text) !important;
 }
 
 .wc-block-mini-cart__drawer :where(.wc-block-components-quantity-selector) {
@@ -1831,7 +1859,7 @@ select.orderby option,
   border: 0 !important;
   border-radius: 0 !important;
   background: transparent !important;
-  color: var(--ws-surface-text) !important;
+  color: var(--ws-control-text) !important;
   font-family: var(--wp--preset--font-family--mono);
   font-size: var(--wp--preset--font-size--medium) !important;
   font-weight: 760;
