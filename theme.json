@@ -324,6 +324,7 @@
         "surfaceBorderColor": "color-mix(in srgb, var(--wp--preset--color--contrast) 16%, transparent)",
         "surfaceKickerColor": "var(--wp--preset--color--accent)",
         "pageKickerColor": "var(--wp--preset--color--accent)",
+        "footerKickerColor": "var(--wp--preset--color--accent)",
         "controlBackground": "var(--wp--preset--color--surface)",
         "controlTextColor": "var(--wp--preset--color--contrast)",
         "controlBorderColor": "color-mix(in srgb, var(--wp--preset--color--contrast) 24%, transparent)",
