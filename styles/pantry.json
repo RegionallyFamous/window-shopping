@@ -473,7 +473,10 @@
         "mobileShowcaseGap": "0.45rem",
         "mobileShowcaseCardPadding": "0.5rem",
         "mobileShowcaseCardMinHeight": "13.4rem",
-        "mobileTrustBandGap": "var(--wp--preset--spacing--30)"
+        "mobileTrustBandGap": "var(--wp--preset--spacing--30)",
+        "ratingStarColor": "var(--wp--preset--color--accent)",
+        "mobileHeroShelfSecondaryDisplay": "none",
+        "mobileHeroShelfExtraDisplay": "none"
       }
     }
   },

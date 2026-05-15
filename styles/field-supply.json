@@ -472,7 +472,12 @@
         "mobileShowcaseGap": "0.45rem",
         "mobileShowcaseCardPadding": "0.5rem",
         "mobileShowcaseCardMinHeight": "13.5rem",
-        "mobileTrustBandGap": "var(--wp--preset--spacing--30)"
+        "mobileTrustBandGap": "var(--wp--preset--spacing--30)",
+        "ratingStarColor": "var(--wp--preset--color--accent-2)",
+        "indexTitleColor": "var(--wp--preset--color--accent)",
+        "indexPriceColor": "var(--wp--preset--color--accent)",
+        "mobileHeroShelfSecondaryDisplay": "none",
+        "mobileHeroShelfExtraDisplay": "none"
       }
     }
   },
@@ -504,7 +509,7 @@
           "color": "currentColor"
         },
         "color": {
-          "background": "transparent",
+          "background": "var:preset|color|accent",
           "text": "var:preset|color|contrast"
         },
         "spacing": {
