@@ -543,7 +543,7 @@
       },
       "link": {
         "color": {
-          "text": "var:preset|color|accent"
+          "text": "var:preset|color|contrast"
         },
         "typography": {
           "textDecoration": "none"

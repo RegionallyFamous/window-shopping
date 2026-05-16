@@ -394,7 +394,7 @@
         "trustIconShellRadius": "999px",
         "trustIconShellBackground": "var(--wp--preset--color--accent-3)",
         "trustIconShellBorder": "1px solid color-mix(in srgb, var(--wp--preset--color--contrast) 10%, transparent)",
-        "trustIconColor": "var(--wp--preset--color--accent)",
+        "trustIconColor": "var(--wp--preset--color--contrast)",
         "showcaseCardMinHeight": "16.7rem",
         "showcaseImageRatio": "4 / 5",
         "showcaseImageRadius": "10px",

@@ -260,9 +260,9 @@
         "buttonHoverTransform": "translate(-2px, -2px)",
         "surfaceTextColor": "var(--wp--preset--color--contrast)",
         "surfaceMutedColor": "var(--wp--preset--color--muted)",
-        "surfaceLinkColor": "var(--wp--preset--color--accent)",
+        "surfaceLinkColor": "#8a004a",
         "surfaceBorderColor": "var(--wp--preset--color--contrast)",
-        "surfaceKickerColor": "var(--wp--preset--color--accent)",
+        "surfaceKickerColor": "#8a004a",
         "pageKickerColor": "var(--wp--preset--color--accent)",
         "comingSoonCopyBasis": "50%",
         "comingSoonMediaBasis": "50%",
@@ -393,7 +393,7 @@
         "trustIconShellRadius": "5px",
         "trustIconShellBackground": "var(--wp--preset--color--accent)",
         "trustIconShellBorder": "2px solid var(--wp--preset--color--contrast)",
-        "trustIconColor": "var(--wp--preset--color--accent-2)",
+        "trustIconColor": "var(--wp--preset--color--contrast)",
         "showcaseCardMinHeight": "14.8rem",
         "showcaseImageRatio": "1 / 1",
         "showcaseImageRadius": "8px",
@@ -510,7 +510,7 @@
         },
         "color": {
           "background": "var:preset|color|accent",
-          "text": "var:preset|color|surface"
+          "text": "var:preset|color|contrast"
         },
         "spacing": {
           "padding": {
@@ -543,7 +543,7 @@
       },
       "link": {
         "color": {
-          "text": "var:preset|color|accent"
+          "text": "#8a004a"
         },
         "typography": {
           "textDecoration": "none"
@@ -623,7 +623,7 @@
         },
         "color": {
           "background": "var:preset|color|accent",
-          "text": "var:preset|color|surface"
+          "text": "var:preset|color|contrast"
         }
       },
       "woocommerce/breadcrumbs": {

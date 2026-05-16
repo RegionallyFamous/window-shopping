@@ -30,10 +30,10 @@
 
 		<!-- wp:pattern {"slug":"window-shopping/product-dossier"} /-->
 
-		<!-- wp:group {"align":"wide","className":"ws-section","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","bottom":"var:preset|spacing|50"}},"border":{"top":{"color":"var:preset|color|muted","width":"1px"}}},"layout":{"type":"constrained"}} -->
-		<div class="wp-block-group alignwide ws-section" style="border-top-color:var(--wp--preset--color--muted);border-top-width:1px;padding-top:var(--wp--preset--spacing--50);padding-bottom:var(--wp--preset--spacing--50)">
-			<!-- wp:heading {"fontSize":"x-large"} -->
-			<h2 class="wp-block-heading has-x-large-font-size">You might also like</h2>
+		<!-- wp:group {"align":"full","className":"ws-section ws-related-products","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"clamp(1rem, 4vw, var(--wp--preset--spacing--60))","bottom":"var:preset|spacing|50","left":"clamp(1rem, 4vw, var(--wp--preset--spacing--60))"}},"border":{"top":{"color":"var:preset|color|muted","width":"1px"}}},"layout":{"type":"constrained","contentSize":"96rem"}} -->
+		<div class="wp-block-group alignfull ws-section ws-related-products" style="border-top-color:var(--wp--preset--color--muted);border-top-width:1px;padding-top:var(--wp--preset--spacing--50);padding-right:clamp(1rem, 4vw, var(--wp--preset--spacing--60));padding-bottom:var(--wp--preset--spacing--50);padding-left:clamp(1rem, 4vw, var(--wp--preset--spacing--60))">
+			<!-- wp:heading {"fontSize":"large"} -->
+			<h2 class="wp-block-heading has-large-font-size">You might also like</h2>
 			<!-- /wp:heading -->
 
 			<!-- wp:woocommerce/product-collection {"queryId":40,"query":{"perPage":4,"pages":1,"offset":0,"postType":"product","order":"asc","orderBy":"title","author":"","search":"","exclude":[],"sticky":"","inherit":false,"taxQuery":{},"isProductCollectionBlock":true,"woocommerceStockStatus":["instock","outofstock","onbackorder"],"filterable":false},"collection":"woocommerce/product-collection/related","tagName":"div","displayLayout":{"type":"flex","columns":4,"shrinkColumns":false},"dimensions":{"widthType":"fill"},"queryContextIncludes":["collection"],"align":"wide","className":"ws-product-grid is-style-index-card"} -->

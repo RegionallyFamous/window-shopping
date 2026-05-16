@@ -81,6 +81,18 @@
 		<!-- wp:woocommerce/empty-cart-block -->
 		<div class="wp-block-woocommerce-empty-cart-block">
 			<!-- wp:pattern {"slug":"window-shopping/empty-cart"} /-->
+
+			<!-- wp:buttons {"className":"ws-empty-cart-actions","style":{"spacing":{"margin":{"top":"var:preset|spacing|40"}}},"layout":{"type":"flex","justifyContent":"center","flexWrap":"wrap"}} -->
+			<div class="wp-block-buttons ws-empty-cart-actions" style="margin-top:var(--wp--preset--spacing--40)">
+				<!-- wp:button -->
+				<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="/shop/">Browse the shop</a></div>
+				<!-- /wp:button -->
+
+				<!-- wp:button {"className":"is-style-outline"} -->
+				<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="/#featured-products">See new arrivals</a></div>
+				<!-- /wp:button -->
+			</div>
+			<!-- /wp:buttons -->
 		</div>
 		<!-- /wp:woocommerce/empty-cart-block -->
 	</div>
