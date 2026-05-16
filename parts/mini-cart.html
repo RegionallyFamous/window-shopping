@@ -45,13 +45,31 @@
 	</div>
 	<!-- /wp:woocommerce/filled-mini-cart-contents-block -->
 
-	<!-- wp:woocommerce/empty-mini-cart-contents-block -->
-	<div class="wp-block-woocommerce-empty-mini-cart-contents-block">
-		<!-- wp:pattern {"slug":"window-shopping/empty-cart"} /-->
+	<!-- wp:woocommerce/empty-mini-cart-contents-block {"className":"ws-mini-cart-empty"} -->
+	<div class="wp-block-woocommerce-empty-mini-cart-contents-block ws-mini-cart-empty">
+		<!-- wp:heading {"level":2,"className":"ws-mini-cart-empty-title"} -->
+		<h2 class="wp-block-heading ws-mini-cart-empty-title">Your cart</h2>
+		<!-- /wp:heading -->
 
-		<!-- wp:woocommerce/mini-cart-shopping-button-block -->
-		<div class="wp-block-woocommerce-mini-cart-shopping-button-block"></div>
-		<!-- /wp:woocommerce/mini-cart-shopping-button-block -->
+		<!-- wp:group {"className":"ws-mini-cart-empty-panel ws-surface","style":{"spacing":{"padding":{"top":"var:preset|spacing|40","right":"var:preset|spacing|40","bottom":"var:preset|spacing|40","left":"var:preset|spacing|40"},"blockGap":"var:preset|spacing|20"},"border":{"color":"var:preset|color|muted","width":"1px","radius":"var(--wp--custom--radius)"},"shadow":"var:preset|shadow|crisp"},"layout":{"type":"constrained"}} -->
+		<div class="wp-block-group ws-mini-cart-empty-panel ws-surface" style="border-color:var(--wp--preset--color--muted);border-width:1px;border-radius:var(--wp--custom--radius);box-shadow:var(--wp--preset--shadow--crisp);padding-top:var(--wp--preset--spacing--40);padding-right:var(--wp--preset--spacing--40);padding-bottom:var(--wp--preset--spacing--40);padding-left:var(--wp--preset--spacing--40)">
+			<!-- wp:paragraph {"className":"ws-kicker","style":{"typography":{"fontWeight":"760","letterSpacing":"0","textTransform":"uppercase"}},"textColor":"accent","fontFamily":"mono","fontSize":"small"} -->
+			<p class="ws-kicker has-accent-color has-text-color has-mono-font-family has-small-font-size" style="font-weight:760;letter-spacing:0;text-transform:uppercase">Empty cart</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:heading {"level":3,"fontSize":"large"} -->
+			<h3 class="wp-block-heading has-large-font-size">Your window is clear.</h3>
+			<!-- /wp:heading -->
+
+			<!-- wp:paragraph {"style":{"color":{"text":"var:preset|color|muted"}},"fontSize":"small"} -->
+			<p class="has-text-color has-small-font-size" style="color:var(--wp--preset--color--muted)">Start with a shelf, a category, or the newest drop.</p>
+			<!-- /wp:paragraph -->
+
+			<!-- wp:woocommerce/mini-cart-shopping-button-block -->
+			<div class="wp-block-woocommerce-mini-cart-shopping-button-block"></div>
+			<!-- /wp:woocommerce/mini-cart-shopping-button-block -->
+		</div>
+		<!-- /wp:group -->
 	</div>
 	<!-- /wp:woocommerce/empty-mini-cart-contents-block -->
 </div>
