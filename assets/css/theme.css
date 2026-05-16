@@ -12,6 +12,9 @@
   --ws-control-text: var(--wp--custom--window--control-text-color, var(--ws-surface-text));
   --ws-control-label: var(--wp--custom--window--control-label-color, color-mix(in srgb, var(--ws-control-text) 74%, var(--ws-control-background)));
   --ws-control-border: var(--wp--custom--window--control-border-color, var(--ws-surface-line));
+  --ws-control-disabled-background: var(--wp--custom--window--control-disabled-background, color-mix(in srgb, var(--ws-control-text) 22%, var(--ws-control-background)));
+  --ws-control-disabled-text: var(--wp--custom--window--control-disabled-text-color, color-mix(in srgb, var(--ws-control-text) 88%, var(--ws-control-background)));
+  --ws-control-disabled-border: var(--wp--custom--window--control-disabled-border-color, color-mix(in srgb, var(--ws-control-text) 34%, var(--ws-control-background)));
   --ws-card-radius: var(--wp--custom--window--product-card-radius, var(--wp--custom--radius));
   --ws-checkout-radius: var(--wp--custom--window--checkout-radius, var(--wp--custom--radius));
   --ws-checkout-control-radius: var(--wp--custom--window--checkout-control-radius, var(--wp--custom--button-radius));
@@ -1693,9 +1696,10 @@ select.orderby option,
 .wc-block-components-button[aria-disabled="true"],
 .wc-block-components-button.is-disabled {
   opacity: 1 !important;
-  border-color: var(--ws-control-border) !important;
-  background: color-mix(in srgb, var(--ws-control-text) 14%, var(--ws-control-background)) !important;
-  color: var(--ws-control-text) !important;
+  border-color: var(--ws-control-disabled-border) !important;
+  background: var(--ws-control-disabled-background) !important;
+  color: var(--ws-control-disabled-text) !important;
+  filter: none !important;
 }
 
 .wc-block-components-button:disabled *,
@@ -1703,6 +1707,7 @@ select.orderby option,
 .wc-block-components-button[aria-disabled="true"] *,
 .wc-block-components-button.is-disabled * {
   color: inherit !important;
+  opacity: 1 !important;
 }
 
 .wc-block-components-text-input input,
